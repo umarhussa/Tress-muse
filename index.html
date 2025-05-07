@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tress Muse - Premium Hair Care</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#FFF5F7',
+              100: '#FFECF0',
+              200: '#FFD9E1',
+              300: '#FFC5D3',
+              400: '#FF9EB7',
+              500: '#FF779B',
+              600: '#FF4D7E',
+              700: '#FF2462',
+              800: '#FF0047',
+              900: '#D6003B',
+            },
+            secondary: {
+              50: '#FFF8F1',
+              100: '#FFF1E2',
+              200: '#FFE2C5',
+              300: '#FFD4A8',
+              400: '#FFB86E',
+              500: '#FF9C34',
+              600: '#FA8000',
+              700: '#CC6700',
+              800: '#9E4F00',
+              900: '#703800',
+            },
+            neon: {
+              pink: '#FF00FF',
+              blue: '#00FFFF',
+              green: '#00FF00',
+              yellow: '#FFFF00',
+            },
+            dark: {
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#334155',
+              600: '#475569',
+            }
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-out forwards',
+            'slide-up': 'slideUp 0.8s ease-out forwards',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'spin-slow': 'spin 8s linear infinite',
+            'bounce-slow': 'bounce 3s infinite',
+            'wiggle': 'wiggle 1s ease-in-out infinite',
+            'shimmer': 'shimmer 2s linear infinite',
+            'scale': 'scale 0.5s ease-out forwards',
+            'smooth-hover': 'smoothHover 0.3s ease-out forwards',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(40px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            wiggle: {
+              '0%, 100%': { transform: 'rotate(-3deg)' },
+              '50%': { transform: 'rotate(3deg)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-1000px 0' },
+              '100%': { backgroundPosition: '1000px 0' },
+            },
+            scale: {
+              '0%': { transform: 'scale(0.8)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            smoothHover: {
+              '0%': { transform: 'translateY(0)' },
+              '100%': { transform: 'translateY(-5px)' },
+            },
+          },
+          backgroundImage: {
+            'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+            'gradient-diagonal': 'linear-gradient(to right bottom, var(--tw-gradient-stops))',
+          },
+          boxShadow: {
+            'neon-pink': '0 0 5px theme("colors.neon.pink"), 0 0 20px theme("colors.neon.pink")',
+            'neon-blue': '0 0 5px theme("colors.neon.blue"), 0 0 20px theme("colors.neon.blue")',
+            'neon-green': '0 0 5px theme("colors.neon.green"), 0 0 20px theme("colors.neon.green")',
+            'neon-yellow': '0 0 5px theme("colors.neon.yellow"), 0 0 20px theme("colors.neon.yellow")',
+            'inner-glow': 'inset 0 0 20px 5px rgba(255, 255, 255, 0.2)',
+            '3d': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 -5px 15px -3px rgba(255, 255, 255, 0.1)',
+            'card-hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+          },
+          textShadow: {
+            'neon': '0 0 5px currentColor, 0 0 10px currentColor, 0 0 20px currentColor',
+          },
+          backdropBlur: {
+            'xs': '2px',
+          },
+        },
+      },
+      plugins: [
+        function({ addUtilities }) {
+          const newUtilities = {
+            '.text-shadow-neon': {
+              textShadow: '0 0 5px currentColor, 0 0 10px currentColor, 0 0 20px currentColor',
+            },
+            '.text-gradient': {
+              backgroundClip: 'text',
+              '-webkit-background-clip': 'text',
+              color: 'transparent',
+            },
+            '.backdrop-blur-xs': {
+              backdropFilter: 'blur(2px)',
+            },
+            '.backdrop-saturate-150': {
+              backdropFilter: 'saturate(150%)',
+            },
+            '.backdrop-contrast-150': {
+              backdropFilter: 'contrast(150%)',
+            },
+            '.scrollbar-hide': {
+              '-ms-overflow-style': 'none',
+              'scrollbar-width': 'none',
+              '&::-webkit-scrollbar': {
+                display: 'none',
+              },
+            },
+          }
+          addUtilities(newUtilities)
+        }
+      ],
+    }
+  </script>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    .animate-slide-up {
+      animation: slideUp 0.8s ease-out forwards;
+    }
+    
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .animate-shimmer {
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+      background-size: 1000px 100%;
+      animation: shimmer 2s linear infinite;
+    }
+    
+    .modal-content {
+      animation: modalFadeIn 0.3s ease-out;
+    }
+    
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    @keyframes modalFadeOut {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.9); }
+    }
+    
+    .animate-modal {
+      animation: modalFadeIn 0.3s ease-out;
+    }
+    
+    .animate-modal-out {
+      animation: modalFadeOut 0.3s ease-out;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    
+    /* Responsive adjustments for small screens */
+    @media (max-width: 640px) {
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+
+    /* Thumbnail gallery styles */
+    .snap-x {
+      scroll-snap-type: x mandatory;
+    }
+
+    .snap-start {
+      scroll-snap-align: start;
+    }
+
+    /* Hide number input arrows */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    /* Thumbnail hover effect */
+    #thumbnails-container > div:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s ease;
+    }
+
+    /* Ensure thumbnails container scrolls smoothly */
+    #thumbnails-container {
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+    }
+
+    #thumbnails-container::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    #thumbnails-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #thumbnails-container::-webkit-scrollbar-thumb {
+      background-color: rgba(156, 163, 175, 0.5);
+      border-radius: 20px;
+    }
+    
+    /* Enhanced hover effects */
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    /* Gradient text */
+    .gradient-text {
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      background-image: linear-gradient(to right, #FF779B, #FF9C34);
+    }
+    
+    /* Glassmorphism effect */
+    .glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    
+    .glass-dark {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    /* Animated underline */
+    .animated-underline {
+      position: relative;
+    }
+    
+    .animated-underline::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: currentColor;
+      transition: width 0.3s ease;
+    }
+    
+    .animated-underline:hover::after {
+      width: 100%;
+    }
+    
+    /* Text shadow for neon effect */
+    .text-shadow-neon {
+      text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 20px currentColor;
+    }
+    
+    /* Scrollbar styling */
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Parallax effect */
+    .parallax {
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    
+    /* 3D card effect - FIXED to be smoother */
+    .card-3d {
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+    
+    .card-3d:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Gradient border */
+    .gradient-border {
+      position: relative;
+      border-radius: 0.5rem;
+      z-index: 0;
+    }
+    
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #FF779B, #FF9C34, #FF779B);
+      z-index: -1;
+      border-radius: 0.6rem;
+      background-size: 200% 200%;
+      animation: gradientMove 3s ease infinite;
+    }
+    
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Futuristic button */
+    .btn-futuristic {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-futuristic::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: all 0.6s ease;
+    }
+    
+    .btn-futuristic:hover::before {
+      left: 100%;
+    }
+    
+    /* Animated background */
+    .animated-bg {
+      background: linear-gradient(-45deg, #FF779B, #FF9C34, #FF779B, #FF9C34);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Neon glow */
+    .neon-glow {
+      box-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 20px currentColor;
+    }
+    
+    /* Ripple effect */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .ripple::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+      background-repeat: no-repeat;
+      background-position: 50%;
+      transform: scale(10, 10);
+      opacity: 0;
+      transition: transform 0.5s, opacity 0.8s;
+    }
+    
+    .ripple:active::after {
+      transform: scale(0, 0);
+      opacity: 0.3;
+      transition: 0s;
+    }
+    
+    /* FIXED: Smooth hover for feature cards */
+    .feature-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: translateZ(0);
+      will-change: transform, box-shadow;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-card .feature-icon {
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1);
+    }
+    
+    /* FIXED: Product card hover effects */
+    .product-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: translateZ(0);
+      will-change: transform, box-shadow;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .product-card .product-image {
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+    
+    .product-card .product-overlay {
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+    
+    .product-card:hover .product-overlay {
+      opacity: 1;
+    }
+    
+    /* Futuristic cursor */
+    .futuristic-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 119, 155, 0.5);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, background 0.3s;
+      mix-blend-mode: screen;
+      box-shadow: 0 0 10px rgba(255, 119, 155, 0.5);
+    }
+    
+    .cursor-expanded {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 119, 155, 0.3);
+    }
+    
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Improved button hover */
+    .btn-hover {
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-hover:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: -100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: all 0.6s ease;
+    }
+    
+    .btn-hover:hover:after {
+      left: 100%;
+    }
+    
+    .btn-hover:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+    }
+    
+    /* Floating animation for elements */
+    @keyframes floating {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    /* Staggered animation for lists */
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    
+    .stagger-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+  <!-- Component JS files -->
+  <script type="module" src="components/navigation.js"></script>
+  <script type="module" src="components/products.js"></script>
+  <script type="module" src="components/productModal.js"></script>
+  <script type="module" src="components/cart.js"></script>
+  <script type="module" src="components/reviews.js"></script>
+  <script type="module" src="components/notifications.js"></script>
+  <script type="module" src="components/auth.js"></script>
+  <script type="module" src="components/animations.js"></script>
+  <script type="module" src="main.js"></script>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 antialiased text-gray-800 overflow-x-hidden">
+  <!-- Cursor Follower (Futuristic Element) -->
+  <div id="cursor-follower" class="fixed w-8 h-8 rounded-full bg-gradient-to-r from-primary-400 to-secondary-400 opacity-0 pointer-events-none mix-blend-screen blur-sm z-50 transition-opacity duration-300"></div>
+
+  <!-- Navbar -->
+  <nav class="bg-gradient-to-r from-primary-500 to-secondary-500 text-white p-4 shadow-lg sticky top-0 z-50 backdrop-blur-md backdrop-saturate-150">
+    <div class="w-full max-w-7xl mx-auto flex justify-between items-center px-4">
+      <div class="text-2xl font-bold flex items-center">
+        <span class="mr-2 animate-pulse-slow">🌸</span>
+        <span class="relative">
+          Tress Muse
+          <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-white opacity-70 rounded"></span>
+        </span>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="#" class="relative font-medium hover:text-white transition-colors duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-white after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 group">
+          Home
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white opacity-0 group-hover:w-full group-hover:opacity-100 transition-all duration-300"></span>
+        </a>
+        <a href="#products" class="relative font-medium hover:text-white transition-colors duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-white after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 group">
+          Products
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white opacity-0 group-hover:w-full group-hover:opacity-100 transition-all duration-300"></span>
+        </a>
+        <a href="#" class="relative font-medium hover:text-white transition-colors duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-white after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 group">
+          About
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white opacity-0 group-hover:w-full group-hover:opacity-100 transition-all duration-300"></span>
+        </a>
+        
+        <!-- Auth Buttons (shown when logged out) -->
+        <div id="auth-buttons" class="flex items-center space-x-4">
+          <a href="login.html" class="font-medium hover:text-white transition-colors duration-300 relative overflow-hidden group">
+            <span class="relative z-10">Sign In</span>
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+          </a>
+          <a href="register.html" class="glass px-4 py-2 rounded-full transition-all hover:bg-white hover:bg-opacity-20 font-medium hover:scale-105 shadow-md hover:shadow-lg relative overflow-hidden group">
+            <span class="relative z-10">Sign Up</span>
+            <span class="absolute inset-0 w-full h-full bg-white bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></span>
+          </a>
+        </div>
+        
+        <!-- User Menu (shown when logged in) -->
+        <div id="user-menu" class="hidden relative">
+          <button class="flex items-center space-x-2 focus:outline-none group" id="user-menu-button">
+            <div class="w-8 h-8 rounded-full bg-white text-primary-500 flex items-center justify-center font-bold group-hover:scale-110 transition-transform duration-300 shadow-md" id="user-initial">U</div>
+            <span id="user-name" class="group-hover:text-white transition-colors duration-300">Account</span>
+            <svg class="w-4 h-4 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          
+          <div class="absolute right-0 mt-2 w-48 glass-dark rounded-lg shadow-lg py-2 hidden transform origin-top scale-95 opacity-0 transition-all duration-200 border border-gray-700" id="user-dropdown">
+            <a href="#" class="block px-4 py-2 text-gray-200 hover:bg-white hover:bg-opacity-10 hover:text-white transition-colors duration-200">My Profile</a>
+            <a href="#" class="block px-4 py-2 text-gray-200 hover:bg-white hover:bg-opacity-10 hover:text-white transition-colors duration-200">My Orders</a>
+            <a href="#" class="block px-4 py-2 text-gray-200 hover:bg-white hover:bg-opacity-10 hover:text-white transition-colors duration-200">Settings</a>
+            <div class="border-t border-gray-700 my-1"></div>
+            <button id="logout-btn" class="block w-full text-left px-4 py-2 text-red-400 hover:bg-red-500 hover:bg-opacity-20 hover:text-red-300 transition-colors duration-200">Sign Out</button>
+          </div>
+        </div>
+        
+        <div class="cart">
+          <a href="#" onclick="viewCart(); return false;" class="flex items-center glass px-4 py-2 rounded-full transition-all duration-300 hover:bg-white hover:bg-opacity-20 hover:scale-105 font-medium group">
+            <span class="mr-1 group-hover:rotate-12 transition-transform duration-300">🛒</span>
+            <span>Cart (<span id="cart-count" class="transition-all duration-300">0</span>)</span>
+            <span class="ml-1 w-2 h-2 bg-white rounded-full animate-pulse hidden" id="cart-notification"></span>
+          </a>
+        </div>
+      </div>
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden text-white focus:outline-none ripple" id="menu-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden w-full mt-4 glass rounded-xl p-4 animate-fade-in">
+      <div class="flex flex-col space-y-3">
+        <a href="#" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white hover:bg-opacity-20 transition-colors ripple">Home</a>
+        <a href="#products" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white hover:bg-opacity-20 transition-colors ripple">Products</a>
+        <a href="#" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white hover:bg-opacity-20 transition-colors ripple">About</a>
+        
+        <!-- Mobile Auth Buttons -->
+        <div id="mobile-auth-buttons" class="flex flex-col space-y-2 pt-2 border-t border-white border-opacity-20">
+          <a href="login.html" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white hover:bg-opacity-20 transition-colors ripple">Sign In</a>
+          <a href="register.html" class="bg-white bg-opacity-20 text-white py-2 px-4 rounded-lg font-medium text-center hover:bg-opacity-30 transition-colors ripple">Sign Up</a>
+        </div>
+        
+        <!-- Mobile User Menu -->
+        <div id="mobile-user-menu" class="hidden flex flex-col space-y-2 pt-2 border-t border-white border-opacity-20">
+          <a href="#" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white hover:bg-opacity-20 transition-colors ripple">My Profile</a>
+          <a href="#" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white hover:bg-opacity-20 transition-colors ripple">My Orders</a>
+          <button id="mobile-logout-btn" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white hover:bg-opacity-20 transition-colors text-left ripple">Sign Out</button>
+        </div>
+        
+        <a href="#" onclick="viewCart(); return false;" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white hover:bg-opacity-20 transition-colors flex items-center ripple">
+          <span class="mr-2">🛒</span>
+          <span>Cart (<span id="mobile-cart-count">0</span>)</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative py-20 md:py-32 overflow-hidden bg-dark-900">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 bg-[url('/placeholder.svg?height=500&width=1000')] bg-no-repeat bg-cover opacity-10"></div>
+    <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-primary-500 rounded-full filter blur-3xl opacity-20 animate-pulse-slow"></div>
+    <div class="absolute -top-24 -left-24 w-64 h-64 bg-secondary-500 rounded-full filter blur-3xl opacity-20 animate-pulse-slow" style="animation-delay: 1s;"></div>
+    
+    <!-- Floating particles -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="particle absolute w-2 h-2 rounded-full bg-white opacity-60 top-1/4 left-1/4 animate-float" style="animation-delay: 0s;"></div>
+      <div class="particle absolute w-3 h-3 rounded-full bg-primary-300 opacity-60 top-1/3 left-1/3 animate-float" style="animation-delay: 0.5s;"></div>
+      <div class="particle absolute w-2 h-2 rounded-full bg-secondary-300 opacity-60 top-2/3 left-2/3 animate-float" style="animation-delay: 1s;"></div>
+      <div class="particle absolute w-4 h-4 rounded-full bg-white opacity-40 top-1/2 left-3/4 animate-float" style="animation-delay: 1.5s;"></div>
+      <div class="particle absolute w-3 h-3 rounded-full bg-primary-400 opacity-50 top-3/4 left-1/4 animate-float" style="animation-delay: 2s;"></div>
+    </div>
+    
+    <div class="max-w-lg mx-auto px-4 relative z-10 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white leading-tight animate-fade-in">
+        Welcome to <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-secondary-400 text-shadow-neon">Tress Muse</span>
+      </h1>
+      <p class="text-gray-300 text-lg md:text-xl font-medium mb-8 animate-fade-in" style="animation-delay: 0.2s;">Discover the perfect hair care solutions tailored just for you.</p>
+      <a href="#products" class="mt-6 btn-futuristic bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 inline-block hover:scale-105 font-medium animate-fade-in group" style="animation-delay: 0.4s;">
+        <span class="relative z-10">Shop Now</span>
+        <span class="absolute inset-0 w-full h-full bg-white bg-opacity-0 group-hover:bg-opacity-10 rounded-full transition-all duration-300"></span>
+        <span class="absolute -inset-0.5 bg-gradient-to-r from-primary-400 to-secondary-400 rounded-full blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></span>
+      </a>
+      
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
+        <svg class="w-6 h-6 text-white opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section - FIXED ANIMATIONS -->
+  <section class="py-16 bg-white relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute top-0 right-0 w-64 h-64 bg-primary-100 rounded-full filter blur-3xl opacity-70 transform translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary-100 rounded-full filter blur-3xl opacity-70 transform -translate-x-1/2 translate-y-1/2"></div>
+    
+    <div class="container mx-auto text-center px-4 relative z-10">
+      <h2 class="text-3xl font-bold mb-2 text-gray-800 inline-block relative">
+        Why Choose Us?
+        <span class="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary-400 to-secondary-400 rounded"></span>
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto mb-12">Our products are crafted with care to give your hair the nourishment it deserves.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Feature Card 1 - FIXED ANIMATION -->
+        <div class="feature-card p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-card-hover relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-r from-pink-50 to-pink-100 opacity-0 transition-opacity duration-300 rounded-2xl"></div>
+          <div class="feature-icon bg-primary-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 relative z-10 shadow-md">
+            <span class="text-primary-500 text-3xl">🌸</span>
+          </div>
+          <h3 class="text-xl font-bold mt-2 text-gray-800 relative z-10 group-hover:text-primary-600 transition-colors duration-300">Natural Ingredients</h3>
+          <p class="text-gray-600 mt-2 font-medium relative z-10">Our products are made with 100% natural ingredients, free from harmful chemicals.</p>
+          
+          <!-- Hover reveal details -->
+          <div class="mt-4 opacity-0 transform translate-y-10 transition-all duration-300 feature-details relative z-10">
+            <ul class="text-left text-sm text-gray-600 space-y-1">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 mr-2 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Organic certified extracts
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 mr-2 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                No parabens or sulfates
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 mr-2 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Cruelty-free formulations
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Feature Card 2 - FIXED ANIMATION -->
+        <div class="feature-card p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-card-hover relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-50 to-blue-100 opacity-0 transition-opacity duration-300 rounded-2xl"></div>
+          <div class="feature-icon bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 relative z-10 shadow-md">
+            <span class="text-blue-500 text-3xl">💧</span>
+          </div>
+          <h3 class="text-xl font-bold mt-2 text-gray-800 relative z-10 group-hover:text-blue-600 transition-colors duration-300">Hydration & Care</h3>
+          <p class="text-gray-600 mt-2 font-medium relative z-10">Special formulas to keep your hair hydrated, healthy, and shining all day long.</p>
+          
+          <!-- Hover reveal details -->
+          <div class="mt-4 opacity-0 transform translate-y-10 transition-all duration-300 feature-details relative z-10">
+            <ul class="text-left text-sm text-gray-600 space-y-1">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Deep moisturizing complex
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Anti-frizz technology
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                UV protection ingredients
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Feature Card 3 - FIXED ANIMATION -->
+        <div class="feature-card p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-card-hover relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-r from-yellow-50 to-yellow-100 opacity-0 transition-opacity duration-300 rounded-2xl"></div>
+          <div class="feature-icon bg-yellow-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 relative z-10 shadow-md">
+            <span class="text-yellow-500 text-3xl">✨</span>
+          </div>
+          <h3 class="text-xl font-bold mt-2 text-gray-800 relative z-10 group-hover:text-yellow-600 transition-colors duration-300">Styling Solutions</h3>
+          <p class="text-gray-600 mt-2 font-medium relative z-10">Achieve your desired look with our professional-grade styling products.</p>
+          
+          <!-- Hover reveal details -->
+          <div class="mt-4 opacity-0 transform translate-y-10 transition-all duration-300 feature-details relative z-10">
+            <ul class="text-left text-sm text-gray-600 space-y-1">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Long-lasting hold
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Heat protection formulas
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Flexible, natural finish
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product List - IMPROVED PRODUCT CARDS -->
+  <section id="products" class="py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute top-0 left-0 w-full h-64 bg-gradient-conic from-primary-100 via-transparent to-secondary-100 opacity-30"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <h2 class="text-3xl font-bold mb-2 text-center text-gray-800 inline-block relative mx-auto">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-600">Featured Products</span>
+        <span class="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary-400 to-secondary-400 rounded"></span>
+      </h2>
+      
+      <!-- Product filter tabs -->
+      <div class="flex justify-center mb-8 mt-6 overflow-x-auto scrollbar-hide">
+        <div class="inline-flex rounded-full shadow-md bg-white p-1">
+          <button class="product-filter-btn active px-4 py-2 rounded-full text-white bg-gradient-to-r from-primary-500 to-secondary-500 transition-all duration-300 text-sm font-medium">All Products</button>
+          <button class="product-filter-btn px-4 py-2 rounded-full text-gray-700 hover:text-gray-900 transition-all duration-300 text-sm font-medium">Shampoo</button>
+          <button class="product-filter-btn px-4 py-2 rounded-full text-gray-700 hover:text-gray-900 transition-all duration-300 text-sm font-medium">Conditioner</button>
+          <button class="product-filter-btn px-4 py-2 rounded-full text-gray-700 hover:text-gray-900 transition-all duration-300 text-sm font-medium">Styling</button>
+          <button class="product-filter-btn px-4 py-2 rounded-full text-gray-700 hover:text-gray-900 transition-all duration-300 text-sm font-medium">Treatment</button>
+        </div>
+      </div>
+      
+      <!-- Products grid with animation stagger -->
+      <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
+        <!-- Products dynamically added here -->
+        <!-- Loading skeleton -->
+        <div class="animate-pulse bg-white rounded-2xl shadow-sm p-4 h-80"></div>
+        <div class="animate-pulse bg-white rounded-2xl shadow-sm p-4 h-80" style="animation-delay: 0.1s"></div>
+        <div class="animate-pulse bg-white rounded-2xl shadow-sm p-4 h-80" style="animation-delay: 0.2s"></div>
+        <div class="animate-pulse bg-white rounded-2xl shadow-sm p-4 h-80" style="animation-delay: 0.3s"></div>
+      </div>
+      
+      <!-- Load more button -->
+      <div class="text-center mt-12">
+        <button id="load-more-btn" class="btn-hover px-6 py-3 bg-white text-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-medium border border-gray-200 hover:border-primary-300 group">
+          <span class="relative z-10 flex items-center">
+            <span>Load More</span>
+            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Product (New Section) -->
+  <section class="py-16 bg-dark-900 text-white relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-900/20 to-secondary-900/20"></div>
+    <div class="absolute top-0 right-0 w-64 h-64 bg-primary-500 rounded-full filter blur-3xl opacity-10 animate-pulse-slow"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary-500 rounded-full filter blur-3xl opacity-10 animate-pulse-slow" style="animation-delay: 1s;"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+        <!-- Product Image with 3D effect -->
+        <div class="lg:w-1/2 relative perspective">
+          <div class="relative transform transition-all duration-500 hover:rotate-y-12 hover:rotate-x-6">
+            <img src="/placeholder.svg?height=600&width=600" alt="Featured Product" class="rounded-2xl shadow-2xl w-full max-w-md mx-auto">
+            <div class="absolute inset-0 bg-gradient-to-tr from-primary-500/20 to-secondary-500/20 rounded-2xl pointer-events-none"></div>
+            
+            <!-- Floating badges -->
+            <div class="absolute top-4 right-4 bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-bold shadow-lg animate-float">
+              Best Seller
+            </div>
+            <div class="absolute bottom-4 left-4 bg-secondary-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg animate-float" style="animation-delay: 1s;">
+              Limited Edition
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product Info -->
+        <div class="lg:w-1/2 space-y-6">
+          <div>
+            <h3 class="text-sm font-semibold text-primary-400 mb-2 tracking-wider">FEATURED PRODUCT</h3>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Revitalizing Hair Serum</h2>
+            <div class="flex items-center mb-4">
+              <div class="flex text-yellow-400">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z"></path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z"></path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z"></path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z"></path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z"></path>
+                </svg>
+              </div>
+              <span class="ml-2 text-gray-300">(128 reviews)</span>
+            </div>
+          </div>
+          
+          <p class="text-gray-300 text-lg leading-relaxed">
+            Our revolutionary hair serum combines the power of natural oils and advanced technology to transform dry, damaged hair into silky, vibrant locks. Experience the difference with just a few drops daily.
+          </p>
+          
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-primary-900 flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <span class="text-gray-300">Repairs split ends and prevents breakage</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-primary-900 flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <span class="text-gray-300">Infused with argan oil and vitamin E</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-primary-900 flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <span class="text-gray-300">Lightweight formula, no greasy residue</span>
+            </div>
+          </div>
+          
+          <div class="flex items-center space-x-4 pt-4">
+            <span class="text-3xl font-bold text-white">$49.99</span>
+            <span class="text-xl line-through text-gray-500">$69.99</span>
+            <span class="bg-primary-500 text-white px-2 py-1 rounded text-sm font-bold">SAVE 30%</span>
+          </div>
+          
+          <div class="flex flex-wrap gap-4 pt-2">
+            <button onclick="addToCart()" class="btn-hover bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-medium group">
+              <span class="relative z-10 flex items-center">
+                <span>Add to Cart</span>
+                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </span>
+            </button>
+            <button class="btn-hover glass px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-white hover:bg-white hover:bg-opacity-10">
+              <span class="relative z-10 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span>Wishlist</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16 bg-white relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 bg-gradient-radial from-primary-50 to-transparent opacity-70"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-4 inline-block relative mx-auto">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-600">What Our Customers Say</span>
+        <span class="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary-400 to-secondary-400 rounded"></span>
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto text-center mb-12">Real experiences from our satisfied customers who have transformed their hair care routine.</p>
+      
+      <!-- Testimonial slider controls -->
+      <div class="flex justify-center mb-8">
+        <button id="prev-testimonial" class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center mr-4 hover:bg-gray-50 transition-colors btn-hover">
+          <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <button id="next-testimonial" class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors btn-hover">
+          <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Testimonial slider -->
+      <div class="relative overflow-hidden">
+        <div id="testimonial-slider" class="flex transition-transform duration-500 ease-in-out">
+          <!-- Testimonials will be dynamically inserted here -->
+          <div id="reviewsContainer" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto w-full">
+            <!-- Reviews dynamically inserted here -->
+          </div>
+        </div>
+        
+        <!-- Testimonial pagination dots -->
+        <div class="flex justify-center mt-8">
+          <div class="flex space-x-2">
+            <button class="w-3 h-3 rounded-full bg-primary-500"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-300 transition-colors"></button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-10">
+        <a href="reviews.html" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 btn-hover group">
+          <span class="relative z-10 flex items-center">
+            <span>Write a Review</span>
+            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter with 3D Effect -->
+  <section class="py-16 bg-gradient-to-r from-primary-50 to-secondary-50 relative overflow-hidden">
+    <div class="absolute -top-24 right-0 w-64 h-64 bg-pink-200 rounded-full filter blur-3xl opacity-50 animate-float"></div>
+    <div class="absolute -bottom-24 left-0 w-64 h-64 bg-orange-200 rounded-full filter blur-3xl opacity-50 animate-float" style="animation-delay: 1.5s;"></div>
+    
+    <div class="container mx-auto px-4 text-center max-w-2xl relative z-10">
+      <div class="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-gray-100 gradient-border transform transition-all duration-500 hover:rotate-y-3 hover:rotate-x-2 card-3d">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white to-gray-50 rounded-2xl transform -z-10"></div>
+        
+        <h2 class="text-3xl font-bold mb-4 text-gray-800 bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-600">Stay Updated</h2>
+        <p class="text-gray-600 mb-6 font-medium">Subscribe to our newsletter for exclusive offers and hair care tips.</p>
+        
+        <div class="flex flex-col sm:flex-row gap-2 justify-center">
+          <input type="email" placeholder="Your email address" class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 flex-grow max-w-md font-medium shadow-sm transition-all duration-300 focus:shadow-md">
+          <button class="bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium hover:scale-105 btn-hover">
+            <span class="relative z-10 flex items-center">
+              <span>Subscribe</span>
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 12h15"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+        
+        <!-- Animated benefits -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flex items-center justify-center bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-300 group">
+            <svg class="w-5 h-5 text-primary-500 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-300">Weekly Updates</span>
+          </div>
+          <div class="flex items-center justify-center bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-300 group">
+            <svg class="w-5 h-5 text-primary-500 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-300">Exclusive Discounts</span>
+          </div>
+          <div class="flex items-center justify-center bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-300 group">
+            <svg class="w-5 h-5 text-primary-500 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-300">Hair Care Tips</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark-900 text-white pt-16 pb-8 relative overflow-hidden">
+    <div class="absolute opacity-5 top-0 left-0 w-full">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#FFFFFF" fill-opacity="1" d="M0,192L48,176C96,160,192,128,288,122.7C384,117,480,139,576,165.3C672,192,768,224,864,213.3C960,203,1056,149,1152,138.7C1248,128,1344,160,1392,176L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+      </svg>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <!-- Brand Column -->
+        <div class="space-y-4">
+          <div class="text-2xl font-bold flex items-center">
+            <span class="mr-2 animate-pulse-slow">🌸</span>
+            <span class="gradient-text text-shadow-neon">Tress Muse</span>
+          </div>
+          <p class="text-gray-400 font-medium">Natural hair care products for all hair types.</p>
+          <div class="flex space-x-3 pt-2">
+            <a href="#" class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center hover:bg-primary-500 transition-colors duration-300 transform hover:rotate-6 group">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400 group-hover:text-white transition-colors duration-300">
+                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center hover:bg-primary-500 transition-colors duration-300 transform hover:rotate-6 group">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400 group-hover:text-white transition-colors duration-300">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center hover:bg-primary-500 transition-colors duration-300 transform hover:rotate-6 group">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400 group-hover:text-white transition-colors duration-300">
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Shop Column -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 pb-2 border-b border-gray-700 w-max">Shop</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Conditioners</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Hair Masks</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Styling Products</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Gift Sets</a></li>
+          </ul>
+        </div>
+        
+        <!-- Company Column -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 pb-2 border-b border-gray-700 w-max">Company</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>About Us</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Our Story</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Sustainability</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Blog</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Careers</a></li>
+          </ul>
+        </div>
+        
+        <!-- Help Column -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 pb-2 border-b border-gray-700 w-max">Help</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Contact Us</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>FAQs</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Shipping</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Returns</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors font-medium group flex items-center"><span class="w-0 group-hover:w-2 transition-all duration-300 h-px bg-primary-400 mr-0 group-hover:mr-2"></span>Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 text-sm font-medium">© 2023 Tress Muse. All rights reserved.</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a href="#" class="text-gray-500 hover:text-primary-400 text-sm font-medium transition-colors">Terms of Service</a>
+          <a href="#" class="text-gray-500 hover:text-primary-400 text-sm font-medium transition-colors">Privacy Policy</a>
+          <a href="#" class="text-gray-500 hover:text-primary-400 text-sm font-medium transition-colors">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Product Details Modal -->
+  <div id="product-details" class="hidden fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex justify-center items-center z-50 transition-all duration-300 p-4 md:p-0">
+    <!-- Fullscreen container with responsive sizing -->
+    <div class="relative w-full max-w-5xl bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 modal-content">
+      <!-- Close button -->
+      <button id="close-product" class="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:scale-110 focus:outline-none group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 group-hover:text-gray-700 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Content container -->
+      <div class="w-full flex flex-col lg:flex-row">
+        <!-- Product Image Gallery (responsive width) -->
+        <div class="lg:w-1/2 p-4 sm:p-6">
+          <!-- Main Image Container -->
+          <div class="relative bg-gray-50 rounded-lg overflow-hidden mb-4 group">
+            <!-- Main Image -->
+            <div id="main-image-container" class="w-full h-64 sm:h-80 md:h-96 flex items-center justify-center">
+              <img id="current-main-image" src="/placeholder.svg" alt="Product" class="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105">
+            </div>
+            
+            <!-- Image overlay with zoom effect -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-primary-500/10 to-secondary-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+            
+            <!-- Navigation Arrows -->
+            <button id="prev-image" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 rounded-full p-2 hover:bg-opacity-100 focus:outline-none transition-transform duration-300 hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button id="next-image" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 rounded-full p-2 hover:bg-opacity-100 focus:outline-none transition-transform duration-300 hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+          
+          <!-- Thumbnails Container - Horizontally Scrollable -->
+          <div class="relative">
+            <div id="thumbnails-container" class="flex space-x-2 overflow-x-auto pb-2 snap-x scrollbar-hide">
+              <!-- Thumbnails will be dynamically inserted here -->
+            </div>
+          </div>
+        </div>
+      
+        <!-- Product Details (responsive width, scrollable) -->
+        <div class="lg:w-1/2 p-4 sm:p-6 overflow-y-auto max-h-[60vh] lg:max-h-[90vh]">
+          <!-- Product Header -->
+          <div class="mb-4 sm:mb-6">
+            <h2 id="detail-name" class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2 bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-600"></h2>
+            <p id="detail-description" class="text-base sm:text-lg text-gray-600 leading-relaxed"></p>
+          </div>
+        
+          <!-- Price and Quantity -->
+          <div class="flex justify-between items-center mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 rounded-lg shadow-inner">
+            <strong id="detail-price" class="text-xl sm:text-2xl text-primary-600 font-bold"></strong>
+            <div class="flex items-center">
+              <button onclick="updateQuantity(-1)" class="bg-gray-200 px-3 sm:px-4 py-1 sm:py-2 rounded-l-lg hover:bg-gray-300 transition-all text-lg sm:text-xl focus:outline-none ripple">-</button>
+              <input id="quantity-input" type="number" min="1" value="1" class="w-10 sm:w-14 text-center text-base sm:text-lg font-medium border-y border-gray-300 focus:outline-none">
+              <button onclick="updateQuantity(1)" class="bg-gray-200 px-3 sm:px-4 py-1 sm:py-2 rounded-r-lg hover:bg-gray-300 transition-all text-lg sm:text-xl focus:outline-none ripple">+</button>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
+            <a id="call-button" class="bg-green-500 hover:bg-green-600 text-white px-2 sm:px-4 py-2 sm:py-3 rounded-lg text-center hidden transition-all flex flex-col items-center justify-center hover:scale-105 shadow-md group">
+              <span class="text-xl sm:text-2xl group-hover:animate-wiggle">📞</span>
+              <span class="text-xs sm:text-sm font-medium">Call</span>
+            </a>
+            <a id="whatsapp-button" class="bg-blue-500 hover:bg-blue-600 text-white px-2 sm:px-4 py-2 sm:py-3 rounded-lg text-center hidden transition-all flex flex-col items-center justify-center hover:scale-105 shadow-md group">
+              <span class="text-xl sm:text-2xl group-hover:animate-wiggle">💬</span>
+              <span class="text-xs sm:text-sm font-medium">WhatsApp</span>
+            </a>
+            <a id="sms-button" class="bg-gray-500 hover:bg-gray-600 text-white px-2 sm:px-4 py-2 sm:py-3 rounded-lg text-center hidden transition-all flex flex-col items-center justify-center hover:scale-105 shadow-md group">
+              <span class="text-xl sm:text-2xl group-hover:animate-wiggle">📩</span>
+              <span class="text-xs sm:text-sm font-medium">SMS</span>
+            </a>
+          </div>
+        
+          <!-- Add to Cart -->
+          <button onclick="addToCart()" class="w-full btn-hover bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-bold text-base sm:text-lg mb-4 sm:mb-6 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 group">
+            <span class="relative z-10 flex items-center justify-center">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+              <span>ADD TO CART</span>
+            </span>
+          </button>
+
+          <!-- Benefits -->
+          <div class="space-y-3 sm:space-y-4 pt-3 sm:pt-4 border-t border-gray-200">
+            <div class="flex items-start">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-2 sm:mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-gray-600 font-medium text-sm sm:text-md">Free worldwide shipping</span>
+            </div>
+            <div class="flex items-start">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-2 sm:mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-gray-600 font-medium text-sm sm:text-md">60-day money back guarantee</span>
+            </div>
+            <div class="flex items-start">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-2 sm:mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-gray-600 font-medium text-sm sm:text-md">Certified organic ingredients</span>
+            </div>
+          </div>
+        
+          <!-- Additional Details -->
+          <div class="mt-4 sm:mt-6">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 sm:mb-3">Description</h3>
+            <div id="extended-details" class="prose text-sm sm:text-base text-gray-600">
+              <!-- Dynamic content will be inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick View Modal (New Feature) -->
+  <div id="quick-view-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50 transition-all duration-300">
+    <div class="relative w-full max-w-3xl bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 scale animate-scale">
+      <button id="close-quick-view" class="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:scale-110 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 hover:text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="flex flex-col md:flex-row">
+        <div class="md:w-1/2 p-4">
+          <img id="quick-view-image" src="/placeholder.svg" alt="Product" class="w-full h-64 object-cover rounded-lg">
+        </div>
+        <div class="md:w-1/2 p-4">
+          <h3 id="quick-view-name" class="text-xl font-bold text-gray-800 mb-2"></h3>
+          <p id="quick-view-price" class="text-lg font-bold text-primary-600 mb-2"></p>
+          <p id="quick-view-description" class="text-gray-600 mb-4 line-clamp-3"></p>
+          <div class="flex space-x-2">
+            <button id="quick-view-add-to-cart" class="btn-hover bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+              Add to Cart
+            </button>
+            <button id="quick-view-details" class="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast (Enhanced) -->
+  <div id="notification-toast" class="hidden fixed bottom-4 right-4 max-w-md bg-white rounded-lg shadow-xl overflow-hidden z-50 transform transition-all duration-500 translate-y-20 opacity-0">
+    <div class="flex items-center p-4">
+      <div id="notification-icon" class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-4"></div>
+      <div class="flex-grow">
+        <h4 id="notification-title" class="text-sm font-bold text-gray-900"></h4>
+        <p id="notification-message" class="text-sm text-gray-600"></p>
+      </div>
+      <button id="close-notification" class="flex-shrink-0 ml-4 text-gray-400 hover:text-gray-500">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="notification-progress" class="h-1 bg-primary-500 w-full transform origin-left scale-x-0 transition-transform duration-3000"></div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-primary-600 transition-all duration-300 transform translate-y-20 opacity-0 z-40">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </button>
+
+  <!-- Color Theme Switcher -->
+  <div class="fixed top-1/2 right-0 transform -translate-y-1/2 z-40">
+    <button id="theme-switcher" class="bg-white p-2 rounded-l-lg shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
+      <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Confirm Dialog -->
+  <div id="confirm-dialog" class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
+    <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full transform transition-all duration-300 scale-95">
+      <h3 id="confirm-title" class="text-lg font-bold text-gray-900 mb-2">Confirm Action</h3>
+      <p id="confirm-message" class="text-gray-600 mb-6">Are you sure you want to proceed?</p>
+      <div class="flex justify-end space-x-3">
+        <button id="confirm-cancel" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-800 font-medium transition-colors">
+          Cancel
+        </button>
+        <button id="confirm-ok" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 rounded-lg text-white font-medium transition-colors">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- User dropdown toggle script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // User menu dropdown
+      const userMenuButton = document.getElementById('user-menu-button');
+      const userDropdown = document.getElementById('user-dropdown');
+      
+      if (userMenuButton && userDropdown) {
+        userMenuButton.addEventListener('click', function() {
+          if (userDropdown.classList.contains('hidden')) {
+            userDropdown.classList.remove('hidden');
+            setTimeout(() => {
+              userDropdown.classList.remove('scale-95', 'opacity-0');
+              userDropdown.classList.add('scale-100', 'opacity-100');
+            }, 10);
+          } else {
+            userDropdown.classList.remove('scale-100', 'opacity-100');
+            userDropdown.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+              userDropdown.classList.add('hidden');
+            }, 200);
+          }
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+          if (!userMenuButton.contains(event.target) && !userDropdown.contains(event.target)) {
+            userDropdown.classList.remove('scale-100', 'opacity-100');
+            userDropdown.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+              userDropdown.classList.add('hidden');
+            }, 200);
+          }
+        });
+      }
+      
+      // Update user name and initial in the UI
+      const userData = localStorage.getItem('tressmuse_user');
+      if (userData) {
+        const user = JSON.parse(userData);
+        const userName = document.getElementById('user-name');
+        const userInitial = document.getElementById('user-initial');
+        
+        if (userName && user.name) {
+          userName.textContent = user.name;
+        }
+        
+        if (userInitial && user.name) {
+          userInitial.textContent = user.name.charAt(0).toUpperCase();
+        }
+      }
+      
+      // Product filter tabs
+      const filterBtns = document.querySelectorAll('.product-filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(b => {
+            b.classList.remove('active', 'text-white', 'bg-gradient-to-r', 'from-primary-500', 'to-secondary-500');
+            b.classList.add('text-gray-700', 'hover:text-gray-900');
+          });
+          this.classList.remove('text-gray-700', 'hover:text-gray-900');
+          this.classList.add('active', 'text-white', 'bg-gradient-to-r', 'from-primary-500', 'to-secondary-500');
+          
+          // Filter products logic would go here
+          // For demo purposes, we'll just show a notification
+          showNotification('Products filtered', 'Category selected: ' + this.textContent.trim(), 'info');
+        });
+      });
+      
+      // Back to top button
+      const backToTopBtn = document.getElementById('back-to-top');
+      if (backToTopBtn) {
+        window.addEventListener('scroll', function() {
+          if (window.pageYOffset > 300) {
+            backToTopBtn.classList.remove('translate-y-20', 'opacity-0');
+            backToTopBtn.classList.add('translate-y-0', 'opacity-100');
+          } else {
+            backToTopBtn.classList.remove('translate-y-0', 'opacity-100');
+            backToTopBtn.classList.add('translate-y-20', 'opacity-0');
+          }
+        });
+        
+        backToTopBtn.addEventListener('click', function() {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+      
+      // Theme switcher
+      const themeSwitcher = document.getElementById('theme-switcher');
+      if (themeSwitcher) {
+        themeSwitcher.addEventListener('click', function() {
+          // For demo purposes, we'll just show a notification
+          showNotification('Theme Changed', 'Theme settings updated successfully!', 'success');
+        });
+      }
+      
+      // Cursor follower
+      const cursorFollower = document.getElementById('cursor-follower');
+      if (cursorFollower) {
+        document.addEventListener('mousemove', function(e) {
+          cursorFollower.style.left = e.clientX + 'px';
+          cursorFollower.style.top = e.clientY + 'px';
+          cursorFollower.style.opacity = '0.5';
+          
+          // Add special effects when hovering over buttons
+          const target = e.target;
+          if (target.tagName === 'BUTTON' || target.tagName === 'A' || 
+              target.closest('button') || target.closest('a')) {
+            cursorFollower.style.transform = 'scale(1.5)';
+          } else {
+            cursorFollower.style.transform = 'scale(1)';
+          }
+        });
+        
+        document.addEventListener('mouseout', function() {
+          cursorFollower.style.opacity = '0';
+        });
+      }
+      
+      // Load more button
+      const loadMoreBtn = document.getElementById('load-more-btn');
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+          // For demo purposes, we'll just show a notification
+          showNotification('Loading More', 'Loading additional products...', 'info');
+          
+          // Simulate loading delay
+          setTimeout(() => {
+            showNotification('Products Loaded', 'New products have been loaded!', 'success');
+          }, 1500);
+        });
+      }
+      
+      // Quick view functionality
+      function setupQuickView() {
+        const quickViewBtns = document.querySelectorAll('.quick-view-btn');
+        const quickViewModal = document.getElementById('quick-view-modal');
+        const closeQuickView = document.getElementById('close-quick-view');
+        
+        if (quickViewBtns.length && quickViewModal && closeQuickView) {
+          quickViewBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              e.preventDefault();
+              
+              // Get product data from data attributes
+              const product = {
+                name: this.dataset.name || 'Product Name',
+                price: this.dataset.price || '$0.00',
+                description: this.dataset.description || 'No description available.',
+                image: this.dataset.image || '/placeholder.svg'
+              };
+              
+              // Update modal content
+              document.getElementById('quick-view-name').textContent = product.name;
+              document.getElementById('quick-view-price').textContent = product.price;
+              document.getElementById('quick-view-description').textContent = product.description;
+              document.getElementById('quick-view-image').src = product.image;
+              
+              // Show modal
+              quickViewModal.classList.remove('hidden');
+            });
+          });
+          
+          closeQuickView.addEventListener('click', function() {
+            quickViewModal.classList.add('hidden');
+          });
+          
+          // Close when clicking outside
+          quickViewModal.addEventListener('click', function(e) {
+            if (e.target === quickViewModal) {
+              quickViewModal.classList.add('hidden');
+            }
+          });
+        }
+      }
+      
+      // Call setupQuickView after products are loaded
+      setTimeout(setupQuickView, 1000);
+      
+      // Enhanced notification system
+      window.showNotification = function(title, message, type = 'info') {
+        const toast = document.getElementById('notification-toast');
+        const titleEl = document.getElementById('notification-title');
+        const messageEl = document.getElementById('notification-message');
+        const iconEl = document.getElementById('notification-icon');
+        const progressEl = document.getElementById('notification-progress');
+        const closeBtn = document.getElementById('close-notification');
+        
+        // Set content
+        titleEl.textContent = title;
+        messageEl.textContent = message;
+        
+        // Set icon and colors based on type
+        iconEl.innerHTML = '';
+        iconEl.className = 'flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-4';
+        
+        if (type === 'success') {
+          iconEl.classList.add('bg-green-100', 'text-green-500');
+          iconEl.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>`;
+          progressEl.classList.add('bg-green-500');
+          progressEl.classList.remove('bg-primary-500', 'bg-red-500', 'bg-blue-500');
+        } else if (type === 'error') {
+          iconEl.classList.add('bg-red-100', 'text-red-500');
+          iconEl.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>`;
+          progressEl.classList.add('bg-red-500');
+          progressEl.classList.remove('bg-primary-500', 'bg-green-500', 'bg-blue-500');
+        } else {
+          iconEl.classList.add('bg-blue-100', 'text-blue-500');
+          iconEl.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>`;
+          progressEl.classList.add('bg-blue-500');
+          progressEl.classList.remove('bg-primary-500', 'bg-green-500', 'bg-red-500');
+        }
+        
+        // Show toast
+        toast.classList.remove('hidden');
+        setTimeout(() => {
+          toast.classList.remove('translate-y-20', 'opacity-0');
+          progressEl.classList.add('scale-x-100');
+        }, 10);
+        
+        // Auto hide after 3 seconds
+        const hideTimeout = setTimeout(() => {
+          hideNotification();
+        }, 3000);
+        
+        // Reset progress bar
+        progressEl.classList.remove('scale-x-100');
+        progressEl.style.transitionDuration = '3000ms';
+        
+        // Close button
+        closeBtn.addEventListener('click', function() {
+          clearTimeout(hideTimeout);
+          hideNotification();
+        });
+        
+        function hideNotification() {
+          toast.classList.add('translate-y-20', 'opacity-0');
+          setTimeout(() => {
+            toast.classList.add('hidden');
+            progressEl.classList.remove('scale-x-100');
+          }, 500);
+        }
+      }
+      
+      // Confirm dialog functionality
+      window.showConfirmDialog = function(message, onConfirm, title = 'Confirm Action') {
+        const dialog = document.getElementById('confirm-dialog');
+        const titleEl = document.getElementById('confirm-title');
+        const messageEl = document.getElementById('confirm-message');
+        const confirmBtn = document.getElementById('confirm-ok');
+        const cancelBtn = document.getElementById('confirm-cancel');
+        
+        titleEl.textContent = title;
+        messageEl.textContent = message;
+        
+        dialog.classList.remove('hidden');
+        
+        // Set up event listeners
+        const handleConfirm = () => {
+          dialog.classList.add('hidden');
+          onConfirm();
+          cleanup();
+        };
+        
+        const handleCancel = () => {
+          dialog.classList.add('hidden');
+          cleanup();
+        };
+        
+        const handleOutsideClick = (e) => {
+          if (e.target === dialog) {
+            dialog.classList.add('hidden');
+            cleanup();
+          }
+        };
+        
+        const cleanup = () => {
+          confirmBtn.removeEventListener('click', handleConfirm);
+          cancelBtn.removeEventListener('click', handleCancel);
+          dialog.removeEventListener('click', handleOutsideClick);
+        };
+        
+        confirmBtn.addEventListener('click', handleConfirm);
+        cancelBtn.addEventListener('click', handleCancel);
+        dialog.addEventListener('click', handleOutsideClick);
+      }
+      
+      // Fix for feature cards hover animation
+      const featureCards = document.querySelectorAll('.feature-card');
+      featureCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.querySelector('.feature-details').classList.remove('opacity-0', 'transform', 'translate-y-10');
+          card.querySelector('.feature-details').classList.add('opacity-100', 'transform', 'translate-y-0');
+          card.querySelector('.absolute').classList.add('opacity-100');
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          card.querySelector('.feature-details').classList.add('opacity-0', 'transform', 'translate-y-10');
+          card.querySelector('.feature-details').classList.remove('opacity-100', 'transform', 'translate-y-0');
+          card.querySelector('.absolute').classList.remove('opacity-100');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
