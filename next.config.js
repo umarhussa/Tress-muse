@@ -17,7 +17,6 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
-  // Ensure we're using CommonJS for better compatibility
   output: "standalone",
 }
 
