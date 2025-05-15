@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Tress Muse - Premium Hair Care</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Tress Muse - Premium Hair Care Products</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
@@ -584,6 +585,18 @@
   <script type="module" src="components/notifications.js"></script>
   <script type="module" src="components/auth.js"></script>
   <script type="module" src="components/animations.js"></script>
+  <script type="module">
+    // Import Supabase from npm package
+    import { createClient } from "@supabase/supabase-js";
+    
+    // Initialize Supabase client
+    const supabaseUrl = "https://yvnsgflmivcotvmklzvw.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bnNnZmxtaXZjb3R2bWtsenZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NDMzOTksImV4cCI6MjA1NjIxOTM5OX0.14RyvvWvfoOvQQGjzebucBPX_foVOD18z_E_-oeNtoU";
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    
+    // Make supabase available globally
+    window.supabase = supabase;
+  </script>
   <script type="module" src="main.js"></script>
 </head>
 <body class="bg-gradient-to-br from-gray-50 to-gray-100 antialiased text-gray-800 overflow-x-hidden">
