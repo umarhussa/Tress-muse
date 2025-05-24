@@ -1,30 +1,30 @@
-# Css improvement suggestions
+# Tress Muse - Static Site
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+This is a static HTML/CSS/JS version of the Tress Muse hair care products website.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/umarhussas-projects/v0-css-improvement-suggestions)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/0mJljYxgz9J)
+## Features
 
-## Overview
-
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+- Responsive design using Tailwind CSS
+- Product showcase
+- About page
+- Simple JavaScript functionality
 
 ## Deployment
 
-Your project is live at:
+This site is designed to be deployed on Vercel as a static site.
 
-**[https://vercel.com/umarhussas-projects/v0-css-improvement-suggestions](https://vercel.com/umarhussas-projects/v0-css-improvement-suggestions)**
+## Development
 
-## Build your app
+To run this site locally, simply open any of the HTML files in your browser.
 
-Continue building your app on:
+## Structure
 
-**[https://v0.dev/chat/projects/0mJljYxgz9J](https://v0.dev/chat/projects/0mJljYxgz9J)**
+- `index.html` - Home page
+- `products.html` - Products page
+- `about.html` - About page
+- `vercel.json` - Vercel configuration
 
-## How It Works
+## Credits
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+- Tailwind CSS for styling
+- Placeholder images from placeholder.com

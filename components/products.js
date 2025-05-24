@@ -1,4 +1,6 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"
+// Use CommonJS require instead of ES module import
+const { createClient } = require("@supabase/supabase-js")
+
 const SUPABASE_URL = "https://yvnsgflmivcotvmklzvw.supabase.co"
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bnNnZmxtaXZjb3R2bWtsenZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NDMzOTksImV4cCI6MjA1NjIxOTM5OX0.14RyvvWvfoOvQQGjzebucBPX_foVOD18z_E_-oeNtoU"
@@ -195,7 +197,14 @@ async function displayProducts() {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
               </svg>
             </button>
-            <button class="bg-white text-primary
+            <button class="bg-white text-primary-600 hover:text-primary-700 p-2 rounded-full transition-colors duration-300 transform hover:scale-110 add-to-cart-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </button>
+          </div>
+          <p class="text-sm text-white/80 line-clamp-2">${cleanedDescription || "No description available."}</p>
+        </div>
       `
 
       // Add image URLs to the product object for the modal
@@ -223,7 +232,11 @@ function showProductDetails(product) {
 }
 
 // Export functions to make them available to other modules
-window.displayProducts = displayProducts
+if (typeof window !== "undefined") {
+  window.displayProducts = displayProducts
+  window.showProductDetails = showProductDetails
+  window.initProductInteractions = initProductInteractions
+}
 
 function initProductInteractions() {
   document.addEventListener("click", (event) => {
@@ -298,4 +311,12 @@ function showQuickViewModal(name, price, description, image) {
       modal.remove()
     }
   })
+}
+
+// Export for CommonJS
+module.exports = {
+  displayProducts,
+  showProductDetails,
+  initProductInteractions,
+  showQuickViewModal,
 }

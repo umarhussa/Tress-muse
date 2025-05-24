@@ -1,252 +1,106 @@
-// Authentication component functionality
+// Use regular npm package import instead of CDN URL
+import { createClient } from "@supabase/supabase-js"
+
+const SUPABASE_URL = "https://yvnsgflmivcotvmklzvw.supabase.co"
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bnNnZmxtaXZjb3R2bWtsenZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NDMzOTksImV4cCI6MjA1NjIxOTM5OX0.14RyvvWvfoOvQQGjzebucBPX_foVOD18z_E_-oeNtoU"
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
 document.addEventListener("DOMContentLoaded", () => {
-  initAuth()
-})
-
-function initAuth() {
-  // Check if user is already logged in from localStorage
-  checkAuthState()
-
-  // Initialize login form
   const loginForm = document.getElementById("login-form")
+  const registerForm = document.getElementById("register-form")
+
   if (loginForm) {
     loginForm.addEventListener("submit", handleLogin)
   }
 
-  // Initialize register form
-  const registerForm = document.getElementById("register-form")
   if (registerForm) {
     registerForm.addEventListener("submit", handleRegister)
   }
 
-  // Initialize logout buttons
-  const logoutBtn = document.getElementById("logout-btn")
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", handleLogout)
-  }
+  // Check if user is already logged in
+  checkUser()
+})
 
-  const mobileLogoutBtn = document.getElementById("mobile-logout-btn")
-  if (mobileLogoutBtn) {
-    mobileLogoutBtn.addEventListener("click", handleLogout)
-  }
-}
-
-function checkAuthState() {
-  try {
-    // Get user data from localStorage
-    const userData = localStorage.getItem("tressmuse_user")
-
-    // Update UI based on authentication state
-    updateAuthUI(!!userData)
-
-    if (userData) {
-      console.log("User is logged in:", JSON.parse(userData).email)
-    } else {
-      console.log("No user logged in")
-    }
-  } catch (error) {
-    console.error("Error checking auth state:", error.message)
-  }
-}
-
-function updateAuthUI(isLoggedIn) {
-  const authButtons = document.getElementById("auth-buttons")
-  const userMenu = document.getElementById("user-menu")
-  const mobileAuthButtons = document.getElementById("mobile-auth-buttons")
-  const mobileUserMenu = document.getElementById("mobile-user-menu")
-
-  // Update desktop UI
-  if (authButtons && userMenu) {
-    if (isLoggedIn) {
-      authButtons.classList.add("hidden")
-      userMenu.classList.remove("hidden")
-    } else {
-      authButtons.classList.remove("hidden")
-      userMenu.classList.add("hidden")
-    }
-  }
-
-  // Update mobile UI
-  if (mobileAuthButtons && mobileUserMenu) {
-    if (isLoggedIn) {
-      mobileAuthButtons.classList.add("hidden")
-      mobileUserMenu.classList.remove("hidden")
-    } else {
-      mobileAuthButtons.classList.remove("hidden")
-      mobileUserMenu.classList.add("hidden")
-    }
-  }
-}
-
-function handleLogin(event) {
+async function handleLogin(event) {
   event.preventDefault()
 
   const email = document.getElementById("email").value
   const password = document.getElementById("password").value
-  const loginBtn = document.getElementById("login-btn")
-
-  // Validate inputs
-  if (!email || !password) {
-    showNotification("Please fill in all fields", "error")
-    return
-  }
-
-  // Disable button and show loading state
-  loginBtn.disabled = true
-  loginBtn.textContent = "Signing in..."
 
   try {
-    // Simulate authentication (in a real app, this would be a server request)
-    setTimeout(() => {
-      // Store user data in localStorage
-      const userData = {
-        email: email,
-        name: email.split("@")[0],
-        isLoggedIn: true,
-      }
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
 
-      localStorage.setItem("tressmuse_user", JSON.stringify(userData))
+    if (error) throw error
 
-      showNotification("Login successful!", "success")
-
-      // Redirect to home page after successful login
-      setTimeout(() => {
-        window.location.href = "index.html"
-      }, 1500)
-    }, 1000)
+    alert("Login successful!")
+    window.location.href = "index.html"
   } catch (error) {
-    console.error("Login error:", error.message)
-    showNotification(error.message, "error")
-
-    // Reset button state
-    loginBtn.disabled = false
-    loginBtn.textContent = "Sign In"
+    alert("Error logging in: " + error.message)
   }
 }
 
-function handleRegister(event) {
+async function handleRegister(event) {
   event.preventDefault()
 
-  const firstName = document.getElementById("first-name")?.value || ""
-  const lastName = document.getElementById("last-name")?.value || ""
   const email = document.getElementById("email").value
   const password = document.getElementById("password").value
-  const confirmPassword = document.getElementById("confirm-password")?.value
-  const termsAccepted = document.getElementById("terms")?.checked
-  const registerBtn = document.getElementById("register-btn")
+  const confirmPassword = document.getElementById("confirm-password").value
 
-  // Validate inputs
-  if (!email || !password) {
-    showNotification("Please fill in all required fields", "error")
+  if (password !== confirmPassword) {
+    alert("Passwords do not match!")
     return
   }
-
-  if (confirmPassword && password !== confirmPassword) {
-    showNotification("Passwords do not match", "error")
-    return
-  }
-
-  if (password.length < 8) {
-    showNotification("Password must be at least 8 characters long", "error")
-    return
-  }
-
-  if (termsAccepted === false) {
-    showNotification("You must accept the Terms of Service", "error")
-    return
-  }
-
-  // Disable button and show loading state
-  registerBtn.disabled = true
-  registerBtn.textContent = "Creating account..."
 
   try {
-    // Simulate registration (in a real app, this would be a server request)
-    setTimeout(() => {
-      // Store user data in localStorage
-      const userData = {
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        name: `${firstName} ${lastName}`.trim() || email.split("@")[0],
-        isLoggedIn: true,
-      }
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    })
 
-      localStorage.setItem("tressmuse_user", JSON.stringify(userData))
+    if (error) throw error
 
-      showNotification("Registration successful!", "success")
-
-      // Redirect to home page after successful registration
-      setTimeout(() => {
-        window.location.href = "index.html"
-      }, 1500)
-    }, 1000)
+    alert("Registration successful! Please check your email for verification.")
+    window.location.href = "login.html"
   } catch (error) {
-    console.error("Registration error:", error.message)
-    showNotification(error.message, "error")
-
-    // Reset button state
-    registerBtn.disabled = false
-    registerBtn.textContent = "Create Account"
+    alert("Error registering: " + error.message)
   }
 }
 
-function handleLogout() {
+async function checkUser() {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (user) {
+    // User is logged in
+    const authLinks = document.querySelectorAll(".auth-link")
+    const profileLinks = document.querySelectorAll(".profile-link")
+
+    authLinks.forEach((link) => (link.style.display = "none"))
+    profileLinks.forEach((link) => (link.style.display = "block"))
+
+    // Set user email in profile
+    const userEmail = document.querySelectorAll(".user-email")
+    userEmail.forEach((el) => {
+      if (el) el.textContent = user.email
+    })
+  }
+}
+
+// Logout function
+window.handleLogout = async () => {
   try {
-    // Remove user data from localStorage
-    localStorage.removeItem("tressmuse_user")
+    const { error } = await supabase.auth.signOut()
+    if (error) throw error
 
-    showNotification("Logged out successfully", "success")
-
-    // Update UI
-    updateAuthUI(false)
-
-    // Redirect to home page
-    setTimeout(() => {
-      window.location.href = "index.html"
-    }, 1500)
+    alert("Logged out successfully!")
+    window.location.href = "index.html"
   } catch (error) {
-    console.error("Logout error:", error.message)
-    showNotification(error.message, "error")
+    alert("Error logging out: " + error.message)
   }
 }
-
-function showNotification(message, type = "info") {
-  // Check if window.showNotification exists (from notifications.js)
-  if (window.showNotification) {
-    window.showNotification(message, type)
-    return
-  }
-
-  // Fallback notification if the global function is not available
-  const notificationDiv = document.createElement("div")
-  notificationDiv.className = `fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-500 ${
-    type === "success"
-      ? "bg-green-500 text-white"
-      : type === "error"
-        ? "bg-red-500 text-white"
-        : "bg-blue-500 text-white"
-  }`
-
-  notificationDiv.textContent = message
-  document.body.appendChild(notificationDiv)
-
-  // Animate in
-  setTimeout(() => {
-    notificationDiv.classList.remove("translate-y-20", "opacity-0")
-  }, 10)
-
-  // Remove after 3 seconds
-  setTimeout(() => {
-    notificationDiv.classList.add("translate-y-20", "opacity-0")
-    setTimeout(() => {
-      notificationDiv.remove()
-    }, 500)
-  }, 3000)
-}
-
-// Export functions to make them available to other modules
-window.checkAuthState = checkAuthState
-window.handleLogin = handleLogin
-window.handleRegister = handleRegister
-window.handleLogout = handleLogout

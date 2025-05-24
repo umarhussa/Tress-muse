@@ -1,4 +1,6 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"
+// Use CommonJS require instead of ES module import
+const { createClient } = require("@supabase/supabase-js")
+
 const SUPABASE_URL = "https://yvnsgflmivcotvmklzvw.supabase.co"
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bnNnZmxtaXZjb3R2bWtsenZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NDMzOTksImV4cCI6MjA1NjIxOTM5OX0.14RyvvWvfoOvQQGjzebucBPX_foVOD18z_E_-oeNtoU"
@@ -80,17 +82,17 @@ async function displayProducts() {
       )
 
       productElement.innerHTML = `
-                <div class="overflow-hidden rounded-xl mb-4">
-                    <img src="${product.image_url}" alt="${product.name}" 
-                         class="w-full h-64 object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">${product.name}</h3>
-                <p class="text-gray-600 mb-3 line-clamp-2">${product.description || "No description available."}</p>
-                <div class="flex justify-between items-center">
-                    <span class="text-lg font-bold text-pink-600">$${product.price}</span>
-                    <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded-full">New</span>
-                </div>
-            `
+        <div class="overflow-hidden rounded-xl mb-4">
+            <img src="${product.image_url}" alt="${product.name}" 
+                 class="w-full h-64 object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">${product.name}</h3>
+        <p class="text-gray-600 mb-3 line-clamp-2">${product.description || "No description available."}</p>
+        <div class="flex justify-between items-center">
+            <span class="text-lg font-bold text-pink-600">$${product.price}</span>
+            <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded-full">New</span>
+        </div>
+      `
 
       productElement.addEventListener("click", () => showProductDetails(product))
       productContainer.appendChild(productElement)
@@ -138,21 +140,21 @@ function showProductDetails(product) {
   // Add product specifications
   const extendedDetails = document.getElementById("extended-details")
   extendedDetails.innerHTML = `
-        <ul class="space-y-2">
-            <li class="flex items-center">
-                <span class="w-32 font-medium text-gray-700">Category:</span>
-                <span>Hair Care</span>
-            </li>
-            <li class="flex items-center">
-                <span class="w-32 font-medium text-gray-700">Weight:</span>
-                <span>250ml</span>
-            </li>
-            <li class="flex items-center">
-                <span class="w-32 font-medium text-gray-700">Ingredients:</span>
-                <span>Natural extracts, Essential oils</span>
-            </li>
-        </ul>
-    `
+    <ul class="space-y-2">
+        <li class="flex items-center">
+            <span class="w-32 font-medium text-gray-700">Category:</span>
+            <span>Hair Care</span>
+        </li>
+        <li class="flex items-center">
+            <span class="w-32 font-medium text-gray-700">Weight:</span>
+            <span>250ml</span>
+        </li>
+        <li class="flex items-center">
+            <span class="w-32 font-medium text-gray-700">Ingredients:</span>
+            <span>Natural extracts, Essential oils</span>
+        </li>
+    </ul>
+  `
 }
 
 document.getElementById("close-product")?.addEventListener("click", () => {
@@ -201,10 +203,10 @@ async function fetchReviews() {
 
     if (reviews.length === 0) {
       reviewsContainer.innerHTML = `
-                <div class="text-center py-8">
-                    <p class="text-gray-500">No reviews yet. Be the first to leave a review!</p>
-                </div>
-            `
+        <div class="text-center py-8">
+            <p class="text-gray-500">No reviews yet. Be the first to leave a review!</p>
+        </div>
+      `
       return
     }
 
@@ -217,17 +219,17 @@ async function fetchReviews() {
         "bg-white shadow-lg rounded-2xl p-6 border border-gray-200 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
 
       reviewElement.innerHTML = `
-                <div class="flex items-center mb-3">
-                    <div class="bg-gradient-to-r from-pink-500 to-orange-400 rounded-full h-12 w-12 flex items-center justify-center text-white font-bold text-lg">
-                        ${initial}
-                    </div>
-                    <div class="ml-3">
-                        <h4 class="font-semibold text-lg text-gray-900">${review.name}</h4>
-                        <small class="text-gray-500">${date}</small>
-                    </div>
-                </div>
-                <p class="text-gray-600 leading-relaxed">${review.review}</p>
-            `
+        <div class="flex items-center mb-3">
+            <div class="bg-gradient-to-r from-pink-500 to-orange-400 rounded-full h-12 w-12 flex items-center justify-center text-white font-bold text-lg">
+                ${initial}
+            </div>
+            <div class="ml-3">
+                <h4 class="font-semibold text-lg text-gray-900">${review.name}</h4>
+                <small class="text-gray-500">${date}</small>
+            </div>
+        </div>
+        <p class="text-gray-600 leading-relaxed">${review.review}</p>
+      `
 
       reviewsContainer.appendChild(reviewElement)
     })
@@ -246,4 +248,20 @@ if (menuBtn && mobileMenu) {
   menuBtn.addEventListener("click", () => {
     mobileMenu.classList.toggle("hidden")
   })
+}
+
+// Export functions to make them available to other modules
+if (typeof window !== "undefined") {
+  window.displayProducts = displayProducts
+  window.showProductDetails = showProductDetails
+  window.submitReview = submitReview
+  window.fetchReviews = fetchReviews
+}
+
+// Export for CommonJS
+module.exports = {
+  displayProducts,
+  showProductDetails,
+  submitReview,
+  fetchReviews,
 }
