@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Tress Muse - Premium Hair Care Products</title>
-  <!-- Use Tailwind CSS from CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -151,14 +150,6 @@
     }
   </script>
   <style>
-    /* Custom styles */
-    .gradient-bg {
-        background: linear-gradient(to right, #f9a8d4, #f97316);
-    }
-    .hover-scale:hover {
-        transform: scale(1.05);
-        transition: transform 0.3s ease;
-    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -710,8 +701,8 @@
     </div>
   </nav>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 md:py-32 overflow-hidden bg-dark-900">
+  <!-- Hero Section -->
+  <section class="relative py-20 md:py-32 overflow-hidden bg-dark-900">
     <!-- Animated background elements -->
     <div class="absolute inset-0 bg-[url('/placeholder.svg?height=500&width=1000')] bg-no-repeat bg-cover opacity-10"></div>
     <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-primary-500 rounded-full filter blur-3xl opacity-20 animate-pulse-slow"></div>
@@ -1728,32 +1719,5 @@
       });
     });
   </script>
-    <!-- Simple inline JavaScript with no imports -->
-    <script>
-        // Simple JavaScript functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add to cart functionality
-            const addToCartButtons = document.querySelectorAll('button:contains("Add to Cart")');
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const productName = this.closest('div.bg-white').querySelector('h3').textContent;
-                    alert(`Added ${productName} to cart!`);
-                });
-            });
-
-            // Newsletter subscription
-            const subscribeButton = document.querySelector('button:contains("Subscribe")');
-            if (subscribeButton) {
-                subscribeButton.addEventListener('click', function() {
-                    const email = this.previousElementSibling.value;
-                    if (email) {
-                        alert(`Thank you for subscribing with ${email}!`);
-                    } else {
-                        alert('Please enter your email address.');
-                    }
-                });
-            }
-        });
-    </script>
 </body>
 </html>

@@ -1,68 +1,79 @@
 const fs = require("fs")
 const path = require("path")
 
+// Patterns that might cause the https: package error
+const problematicPatterns = [
+  'import * from "https:',
+  'import from "https:',
+  'require("https:',
+  '"dependencies": {[\\s\\S]*?"https:',
+  '"devDependencies": {[\\s\\S]*?"https:',
+  'from "https:',
+  "from 'https:",
+  'url: "https:',
+  "url: 'https:",
+  'href="https:',
+  "href='https:",
+  'src="https:',
+  "src='https:",
+]
+
+// File extensions to check
+const extensions = [".js", ".jsx", ".ts", ".tsx", ".json", ".html", ".css"]
+
 // Directories to ignore
 const ignoreDirs = ["node_modules", ".next", "out", ".git", ".vercel"]
 
-// File extensions to check
-const extensions = [".js", ".jsx", ".ts", ".tsx", ".json", ".html"]
-
-// Function to scan a directory recursively
 function scanDirectory(dir) {
-  const entries = fs.readdirSync(dir, { withFileTypes: true })
+  try {
+    const entries = fs.readdirSync(dir, { withFileTypes: true })
 
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name)
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name)
 
-    if (entry.isDirectory()) {
-      if (!ignoreDirs.includes(entry.name)) {
-        scanDirectory(fullPath)
+      if (entry.isDirectory()) {
+        if (!ignoreDirs.includes(entry.name)) {
+          scanDirectory(fullPath)
+        }
+        continue
       }
-      continue
-    }
 
-    const ext = path.extname(entry.name).toLowerCase()
-    if (extensions.includes(ext)) {
-      checkFile(fullPath)
+      const ext = path.extname(entry.name).toLowerCase()
+      if (extensions.includes(ext)) {
+        checkFile(fullPath)
+      }
     }
+  } catch (error) {
+    console.error(`Error scanning directory ${dir}:`, error)
   }
 }
 
-// Function to check a file for problematic imports
 function checkFile(filePath) {
   try {
     const content = fs.readFileSync(filePath, "utf8")
 
-    // Check for imports from https: URLs
-    const importRegex = /import\s+.*\s+from\s+["']https:/g
-    const requireRegex = /require\s*\(\s*["']https:/g
-    const cdnRegex = /from\s+["']https:\/\/cdn\.jsdelivr\.net/g
+    for (const pattern of problematicPatterns) {
+      const regex = new RegExp(pattern, "i")
+      if (regex.test(content)) {
+        console.log(`Found problematic pattern in ${filePath}:`)
+        console.log(`  Pattern: ${pattern}`)
 
-    let match
-    let found = false
-
-    if (importRegex.test(content) || requireRegex.test(content) || cdnRegex.test(content)) {
-      console.log(`Found problematic imports in ${filePath}:`)
-      found = true
-
-      // Get the lines with the problematic imports
-      const lines = content.split("\n")
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i]
-        if (line.match(importRegex) || line.match(requireRegex) || line.match(cdnRegex)) {
-          console.log(`  Line ${i + 1}: ${line.trim()}`)
+        // Extract the context around the match
+        const lines = content.split("\n")
+        for (let i = 0; i < lines.length; i++) {
+          if (regex.test(lines[i])) {
+            console.log(`  Line ${i + 1}: ${lines[i].trim()}`)
+          }
         }
+        console.log()
       }
     }
-
-    if (found) {
-      console.log("")
-    }
   } catch (error) {
-    console.error(`Error reading file ${filePath}: ${error.message}`)
+    console.error(`Error checking file ${filePath}:`, error)
   }
 }
 
+// Start scanning from the current directory
 console.log("Scanning for problematic imports...")
 scanDirectory(".")
 console.log("Scan complete.")
