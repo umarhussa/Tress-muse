@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { Poppins } from "next/font/google"
 import "./globals.css"
 import { AuthProvider } from "@/lib/hooks/useAuth"
-import { CartProvider } from "@/lib/hooks/useCart"
 import { Toaster } from "react-hot-toast"
 
 const poppins = Poppins({
@@ -30,19 +29,17 @@ export default function RootLayout({
         className={`${poppins.variable} font-sans bg-gradient-to-br from-gray-50 to-gray-100 antialiased text-gray-800 overflow-x-hidden`}
       >
         <AuthProvider>
-          <CartProvider>
-            {children}
-            <Toaster
-              position="bottom-right"
-              toastOptions={{
-                duration: 3000,
-                style: {
-                  background: "#363636",
-                  color: "#fff",
-                },
-              }}
-            />
-          </CartProvider>
+          {children}
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              duration: 3000,
+              style: {
+                background: "#363636",
+                color: "#fff",
+              },
+            }}
+          />
         </AuthProvider>
       </body>
     </html>

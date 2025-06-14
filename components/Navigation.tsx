@@ -3,15 +3,13 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useAuth } from "@/lib/hooks/useAuth"
-import { useCart } from "@/lib/hooks/useCart"
-import { Menu, X, ShoppingCart, User, LogOut } from "lucide-react"
+import { Menu, X, User, LogOut } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const { user, logout } = useAuth()
-  const { totalItems } = useCart()
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen)
@@ -42,20 +40,6 @@ export default function Navigation() {
           <Link href="/reviews" className="font-medium hover:text-white/80 transition-colors">
             Reviews
           </Link>
-
-          {/* Cart */}
-          <button className="relative p-2 hover:bg-white/10 rounded-full transition-colors">
-            <ShoppingCart className="w-6 h-6" />
-            {totalItems > 0 && (
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
-              >
-                {totalItems}
-              </motion.span>
-            )}
-          </button>
 
           {/* Auth Section */}
           {user ? (

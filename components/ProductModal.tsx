@@ -3,9 +3,8 @@
 import { useState } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Phone, MessageCircle, Mail, Plus, Minus, ChevronLeft, ChevronRight } from "lucide-react"
+import { X, Phone, MessageCircle, Mail, ChevronLeft, ChevronRight } from "lucide-react"
 import type { Product } from "@/lib/supabase"
-import { useCart } from "@/lib/hooks/useCart"
 
 interface ProductModalProps {
   product: Product
@@ -15,8 +14,6 @@ interface ProductModalProps {
 
 export default function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [quantity, setQuantity] = useState(1)
-  const { addToCart } = useCart()
 
   // Parse image URLs
   const getImageUrls = (imageUrl: string) => {
@@ -59,20 +56,6 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
 
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + imageUrls.length) % imageUrls.length)
-  }
-
-  const handleAddToCart = () => {
-    addToCart({
-      name: product.name,
-      price: product.price,
-      quantity,
-      image: imageUrls[0],
-    })
-    onClose()
-  }
-
-  const updateQuantity = (change: number) => {
-    setQuantity((prev) => Math.max(1, prev + change))
   }
 
   if (!isOpen) return null
@@ -195,39 +178,15 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                   </div>
                 )}
 
-                {/* Quantity Selector */}
-                <div className="flex items-center space-x-4">
-                  <span className="font-medium text-gray-700">Quantity:</span>
-                  <div className="flex items-center border border-gray-300 rounded-lg">
-                    <button onClick={() => updateQuantity(-1)} className="p-2 hover:bg-gray-100 transition-colors">
-                      <Minus className="w-4 h-4" />
-                    </button>
-                    <span className="px-4 py-2 font-medium">{quantity}</span>
-                    <button onClick={() => updateQuantity(1)} className="p-2 hover:bg-gray-100 transition-colors">
-                      <Plus className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
+                {/* Contact Buttons */}
                 <div className="space-y-4">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={handleAddToCart}
-                    className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white font-medium py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
-                  >
-                    Add to Cart
-                  </motion.button>
-
-                  {/* Contact Buttons */}
                   <div className="flex space-x-2">
                     {product.phone && (
                       <motion.a
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         href={`tel:${product.phone}`}
-                        className="flex-1 flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                        className="flex-1 flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
                       >
                         <Phone className="w-4 h-4 mr-2" />
                         Call
@@ -241,7 +200,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                         href={`https://wa.me/${product.whatsapp}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                        className="flex-1 flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-colors"
                       >
                         <MessageCircle className="w-4 h-4 mr-2" />
                         WhatsApp
@@ -253,7 +212,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         href={`sms:${product.phone}`}
-                        className="flex-1 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                        className="flex-1 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
                       >
                         <Mail className="w-4 h-4 mr-2" />
                         SMS
