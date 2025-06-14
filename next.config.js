@@ -1,14 +1,18 @@
-// This file is not needed for static deployment but keeping for compatibility
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
   },
-  output: "export",
-  trailingSlash: true,
   images: {
+    domains: ["yvnsgflmivcotvmklzvw.supabase.co"],
     unoptimized: true,
   },
+  experimental: {
+    appDir: true,
+  },
 }
+
+module.exports = nextConfig
