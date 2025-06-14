@@ -1,6 +1,4 @@
-// Use proper import syntax for modules
-import { createClient } from "@supabase/supabase-js"
-
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"
 const SUPABASE_URL = "https://yvnsgflmivcotvmklzvw.supabase.co"
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bnNnZmxtaXZjb3R2bWtsenZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NDMzOTksImV4cCI6MjA1NjIxOTM5OX0.14RyvvWvfoOvQQGjzebucBPX_foVOD18z_E_-oeNtoU"
@@ -28,37 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize image preview
   displaySelectedImages()
-
-  // Initialize premium toggle
-  initPremiumToggle()
-
-  // Initialize best seller toggle
-  initBestSellerToggle()
 })
-
-function initPremiumToggle() {
-  const premiumToggle = document.getElementById("product-premium")
-  const premiumSection = document.getElementById("premium-section")
-
-  if (premiumToggle && premiumSection) {
-    // Set initial state
-    premiumSection.style.display = premiumToggle.checked ? "block" : "none"
-
-    // Add event listener for toggle changes
-    premiumToggle.addEventListener("change", function () {
-      premiumSection.style.display = this.checked ? "block" : "none"
-    })
-  }
-}
-
-function initBestSellerToggle() {
-  const bestSellerToggle = document.getElementById("product-bestseller")
-
-  if (bestSellerToggle) {
-    // No additional UI to show/hide, just the toggle itself
-    console.log("Best seller toggle initialized")
-  }
-}
 
 async function addProduct() {
   const name = document.getElementById("product-name").value.trim()
@@ -72,21 +40,6 @@ async function addProduct() {
   const category = document.getElementById("product-category").value.trim()
   const weight = document.getElementById("product-weight").value.trim()
   const ingredients = document.getElementById("product-ingredients").value.trim()
-
-  // Get premium details
-  const isPremium = document.getElementById("product-premium")?.checked || false
-  const isBestSeller = document.getElementById("product-bestseller")?.checked || false
-  const premiumBenefits = []
-
-  if (isPremium) {
-    const benefit1 = document.getElementById("premium-benefit-1")?.value.trim()
-    const benefit2 = document.getElementById("premium-benefit-2")?.value.trim()
-    const benefit3 = document.getElementById("premium-benefit-3")?.value.trim()
-
-    if (benefit1) premiumBenefits.push(benefit1)
-    if (benefit2) premiumBenefits.push(benefit2)
-    if (benefit3) premiumBenefits.push(benefit3)
-  }
 
   // Form validation
   if (!name || isNaN(price) || imageFiles.length === 0 || !phone || !whatsapp) {
@@ -124,9 +77,6 @@ async function addProduct() {
       category: category || "Hair Care",
       weight: weight || "250ml",
       ingredients: ingredients || "Natural extracts, Essential oils",
-      premium: isPremium,
-      bestSeller: isBestSeller,
-      benefits: premiumBenefits.length > 0 ? premiumBenefits : undefined,
     }
 
     // Include metadata in the description field
@@ -192,4 +142,4 @@ function displaySelectedImages() {
 }
 
 // Export functions to make them available to other modules
-export { addProduct, showNotification }
+window.addProduct = addProduct

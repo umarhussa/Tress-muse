@@ -34,6 +34,12 @@ function initAnimations() {
 
   // Initialize floating elements
   initFloatingElements()
+
+  // Initialize futuristic cursor
+  initFuturisticCursor()
+
+  // Initialize theme toggle
+  initThemeToggle()
 }
 
 function initHoverEffects() {
@@ -81,7 +87,7 @@ function createRippleEffect(e) {
 
   // Remove the ripple after animation completes
   setTimeout(() => {
-    if (circle) {
+    if (circle && circle.parentNode) {
       circle.remove()
     }
   }, 600)
@@ -89,13 +95,24 @@ function createRippleEffect(e) {
 
 function initParallax() {
   // Simple parallax effect for background elements
-  window.addEventListener("scroll", () => {
+  let ticking = false
+
+  function updateParallax() {
     const scrollY = window.scrollY
 
     document.querySelectorAll(".parallax-bg").forEach((element) => {
-      const speed = element.getAttribute("data-speed") || 0.2
+      const speed = Number.parseFloat(element.getAttribute("data-speed")) || 0.2
       element.style.transform = `translateY(${scrollY * speed}px)`
     })
+
+    ticking = false
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax)
+      ticking = true
+    }
   })
 }
 
@@ -116,21 +133,50 @@ function initFloatingElements() {
 function initFuturisticCursor() {
   const cursor = document.createElement("div")
   cursor.classList.add("futuristic-cursor")
+  cursor.style.cssText = `
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ff6b6b;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.1s ease;
+    mix-blend-mode: difference;
+  `
   document.body.appendChild(cursor)
 
+  let mouseX = 0
+  let mouseY = 0
+  let cursorX = 0
+  let cursorY = 0
+
   document.addEventListener("mousemove", (e) => {
-    cursor.style.left = `${e.clientX}px`
-    cursor.style.top = `${e.clientY}px`
+    mouseX = e.clientX
+    mouseY = e.clientY
   })
 
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.1
+    cursorY += (mouseY - cursorY) * 0.1
+
+    cursor.style.left = `${cursorX - 10}px`
+    cursor.style.top = `${cursorY - 10}px`
+
+    requestAnimationFrame(animateCursor)
+  }
+  animateCursor()
+
   // Add special effects when hovering over interactive elements
-  document.querySelectorAll("button, a, .product-card").forEach((element) => {
+  document.querySelectorAll("button, a, .product-card, .clickable").forEach((element) => {
     element.addEventListener("mouseenter", () => {
-      cursor.classList.add("cursor-expanded")
+      cursor.style.transform = "scale(2)"
+      cursor.style.backgroundColor = "rgba(255, 107, 107, 0.2)"
     })
 
     element.addEventListener("mouseleave", () => {
-      cursor.classList.remove("cursor-expanded")
+      cursor.style.transform = "scale(1)"
+      cursor.style.backgroundColor = "transparent"
     })
   })
 }
@@ -152,6 +198,13 @@ function initThemeToggle() {
         toggleIcon.classList.toggle("fa-moon")
         toggleIcon.classList.toggle("fa-sun")
       }
+
+      // Trigger theme change event
+      document.dispatchEvent(
+        new CustomEvent("themeChanged", {
+          detail: { isDark: isDarkTheme },
+        }),
+      )
     })
 
     // Check for saved theme preference
@@ -167,8 +220,61 @@ function initThemeToggle() {
   }
 }
 
-// Call additional initializations
+// Smooth scroll functionality
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault()
+      const target = document.querySelector(this.getAttribute("href"))
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }
+    })
+  })
+}
+
+// Initialize page transitions
+function initPageTransitions() {
+  // Add fade-in effect to page load
+  document.body.style.opacity = "0"
+  document.body.style.transition = "opacity 0.3s ease-in-out"
+
+  window.addEventListener("load", () => {
+    document.body.style.opacity = "1"
+  })
+}
+
+// Performance optimization: Debounce function
+function debounce(func, wait) {
+  let timeout
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout)
+      func(...args)
+    }
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+  }
+}
+
+// Initialize all animations when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-  initFuturisticCursor()
-  initThemeToggle()
+  initAnimations()
+  initSmoothScroll()
+  initPageTransitions()
 })
+
+// Export functions for external use
+window.AnimationUtils = {
+  initAnimations,
+  initHoverEffects,
+  initParallax,
+  initFloatingElements,
+  initFuturisticCursor,
+  initThemeToggle,
+  createRippleEffect,
+  debounce,
+}
