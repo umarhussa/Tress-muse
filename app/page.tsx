@@ -207,98 +207,97 @@ export default function HomePage() {
                 icon: <Leaf className="w-8 h-8" />,
                 title: "Natural Ingredients",
                 description: "Made with premium natural extracts and essential oils for healthy hair growth",
-                bgColor: "bg-gradient-to-br from-green-50 to-emerald-50",
-                iconBg: "bg-gradient-to-br from-green-100 to-emerald-100",
-                hoverBg: "hover:bg-green-500",
-                hoverIconBg: "group-hover:bg-white",
-                hoverText: "group-hover:text-white",
-                hoverIcon: "group-hover:text-green-500",
+                gradient: "from-green-500 to-emerald-500",
+                bgGradient: "from-green-50 to-emerald-50",
+                iconBg: "from-green-100 to-emerald-100",
               },
               {
                 icon: <Award className="w-8 h-8" />,
                 title: "Premium Quality",
                 description: "Carefully crafted products that deliver exceptional and long-lasting results",
-                bgColor: "bg-gradient-to-br from-purple-50 to-violet-50",
-                iconBg: "bg-gradient-to-br from-purple-100 to-violet-100",
-                hoverBg: "hover:bg-purple-500",
-                hoverIconBg: "group-hover:bg-white",
-                hoverText: "group-hover:text-white",
-                hoverIcon: "group-hover:text-purple-500",
+                gradient: "from-purple-500 to-violet-500",
+                bgGradient: "from-purple-50 to-violet-50",
+                iconBg: "from-purple-100 to-violet-100",
               },
               {
                 icon: <Heart className="w-8 h-8" />,
                 title: "Hair Health",
                 description: "Nourish and strengthen your hair from root to tip with our specialized formulas",
-                bgColor: "bg-gradient-to-br from-pink-50 to-rose-50",
-                iconBg: "bg-gradient-to-br from-pink-100 to-rose-100",
-                hoverBg: "hover:bg-pink-500",
-                hoverIconBg: "group-hover:bg-white",
-                hoverText: "group-hover:text-white",
-                hoverIcon: "group-hover:text-pink-500",
+                gradient: "from-pink-500 to-rose-500",
+                bgGradient: "from-pink-50 to-rose-50",
+                iconBg: "from-pink-100 to-rose-100",
               },
               {
                 icon: <Sparkles className="w-8 h-8" />,
                 title: "Beautiful Results",
                 description: "Transform your hair with visible, lasting improvements in texture and shine",
-                bgColor: "bg-gradient-to-br from-yellow-50 to-orange-50",
-                iconBg: "bg-gradient-to-br from-yellow-100 to-orange-100",
-                hoverBg: "hover:bg-orange-500",
-                hoverIconBg: "group-hover:bg-white",
-                hoverText: "group-hover:text-white",
-                hoverIcon: "group-hover:text-orange-500",
+                gradient: "from-orange-500 to-yellow-500",
+                bgGradient: "from-orange-50 to-yellow-50",
+                iconBg: "from-orange-100 to-yellow-100",
               },
             ].map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{
-                  scale: 1.05,
-                  y: -10,
-                }}
                 transition={{
                   duration: 0.6,
                   delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20,
+                  ease: "easeOut",
                 }}
-                className={`group relative p-8 rounded-3xl ${feature.bgColor} border border-white shadow-lg hover:shadow-2xl ${feature.hoverBg} transition-all duration-500 cursor-pointer overflow-hidden`}
+                className="group relative"
               >
-                {/* Icon with Enhanced Animation */}
                 <motion.div
                   whileHover={{
-                    rotate: 360,
-                    scale: 1.1,
+                    scale: 1.02,
+                    y: -8,
                   }}
                   transition={{
-                    duration: 0.6,
-                    type: "spring",
-                    stiffness: 200,
+                    duration: 0.3,
+                    ease: "easeOut",
                   }}
-                  className={`inline-flex items-center justify-center w-20 h-20 ${feature.iconBg} ${feature.hoverIconBg} rounded-3xl mb-6 shadow-lg transition-all duration-500`}
+                  className={`relative p-8 rounded-3xl bg-gradient-to-br ${feature.bgGradient} border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden h-full`}
                 >
-                  <span className={`text-gray-700 ${feature.hoverIcon} transition-colors duration-500`}>
-                    {feature.icon}
-                  </span>
+                  {/* Hover overlay */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl`}
+                  />
+
+                  {/* Content */}
+                  <div className="relative z-10">
+                    {/* Icon */}
+                    <motion.div
+                      whileHover={{
+                        rotate: 5,
+                        scale: 1.1,
+                      }}
+                      transition={{
+                        duration: 0.3,
+                        ease: "easeOut",
+                      }}
+                      className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br ${feature.iconBg} group-hover:bg-white/20 rounded-3xl mb-6 shadow-lg transition-all duration-300`}
+                    >
+                      <span className="text-gray-700 group-hover:text-white transition-colors duration-300">
+                        {feature.icon}
+                      </span>
+                    </motion.div>
+
+                    {/* Text Content */}
+                    <div>
+                      <h3 className="text-xl font-bold mb-4 text-gray-800 group-hover:text-white transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      <p className="text-gray-600 group-hover:text-white/90 leading-relaxed transition-colors duration-300 text-sm">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Subtle shine effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  </div>
                 </motion.div>
-
-                {/* Content */}
-                <div>
-                  <h3
-                    className={`text-xl font-bold mb-4 text-gray-800 ${feature.hoverText} transition-colors duration-500`}
-                  >
-                    {feature.title}
-                  </h3>
-                  <p
-                    className={`text-gray-600 ${feature.hoverText} leading-relaxed transition-colors duration-500 text-sm`}
-                  >
-                    {feature.description}
-                  </p>
-                </div>
-
-                {/* Hover overlay for smooth color transition */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"></div>
               </motion.div>
             ))}
           </div>

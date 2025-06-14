@@ -8,7 +8,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/hooks/useAuth"
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"
-import toast from "react-hot-toast"
+import toast, { Toaster } from "react-hot-toast"
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -46,8 +46,8 @@ export default function RegisterPage() {
       return
     }
 
-    if (formData.password.length < 8) {
-      toast.error("Password must be at least 8 characters long")
+    if (formData.password.length < 6) {
+      toast.error("Password must be at least 6 characters long")
       return
     }
 
@@ -65,10 +65,10 @@ export default function RegisterPage() {
         email: formData.email,
         password: formData.password,
       })
-      toast.success("Registration successful!")
+      toast.success("Registration successful! Please check your email to verify your account.")
       router.push("/")
-    } catch (error) {
-      toast.error("Registration failed. Please try again.")
+    } catch (error: any) {
+      toast.error(error.message || "Registration failed. Please try again.")
     } finally {
       setIsLoading(false)
     }
@@ -76,6 +76,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center p-4">
+      <Toaster position="top-right" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -189,7 +190,7 @@ export default function RegisterPage() {
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
-              <p className="mt-1 text-xs text-gray-500">Password must be at least 8 characters long</p>
+              <p className="mt-1 text-xs text-gray-500">Password must be at least 6 characters long</p>
             </div>
 
             {/* Confirm Password Field */}

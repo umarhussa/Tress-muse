@@ -1,8 +1,10 @@
 "use client"
 
 import { useState, useEffect, createContext, useContext, type ReactNode } from "react"
+import { supabase } from "@/lib/supabase"
 
 type User = {
+  id: string
   email: string
   name: string
   firstName?: string
@@ -30,35 +32,72 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Check for existing user session
-    const userData = localStorage.getItem("tressmuse_user")
-    if (userData) {
-      try {
-        setUser(JSON.parse(userData))
-      } catch (error) {
-        console.error("Error parsing user data:", error)
-        localStorage.removeItem("tressmuse_user")
+    // Get initial session
+    const getSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
+      if (session?.user) {
+        setUser({
+          id: session.user.id,
+          email: session.user.email || "",
+          name: session.user.user_metadata?.full_name || session.user.email?.split("@")[0] || "",
+          firstName: session.user.user_metadata?.firstName,
+          lastName: session.user.user_metadata?.lastName,
+          isLoggedIn: true,
+        })
       }
+      setIsLoading(false)
     }
-    setIsLoading(false)
+
+    getSession()
+
+    // Listen for auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (session?.user) {
+        setUser({
+          id: session.user.id,
+          email: session.user.email || "",
+          name: session.user.user_metadata?.full_name || session.user.email?.split("@")[0] || "",
+          firstName: session.user.user_metadata?.firstName,
+          lastName: session.user.user_metadata?.lastName,
+          isLoggedIn: true,
+        })
+      } else {
+        setUser(null)
+      }
+      setIsLoading(false)
+    })
+
+    return () => subscription.unsubscribe()
   }, [])
 
   const login = async (email: string, password: string) => {
     setIsLoading(true)
     try {
-      // Simulate authentication (replace with real auth logic)
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      const userData: User = {
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
-        name: email.split("@")[0],
-        isLoggedIn: true,
+        password,
+      })
+
+      if (error) {
+        throw new Error(error.message)
       }
 
-      localStorage.setItem("tressmuse_user", JSON.stringify(userData))
-      setUser(userData)
+      if (data.user) {
+        setUser({
+          id: data.user.id,
+          email: data.user.email || "",
+          name: data.user.user_metadata?.full_name || data.user.email?.split("@")[0] || "",
+          firstName: data.user.user_metadata?.firstName,
+          lastName: data.user.user_metadata?.lastName,
+          isLoggedIn: true,
+        })
+      }
     } catch (error) {
-      throw new Error("Login failed")
+      throw error
     } finally {
       setIsLoading(false)
     }
@@ -72,28 +111,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }) => {
     setIsLoading(true)
     try {
-      // Simulate registration (replace with real auth logic)
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      const user: User = {
+      const { data, error } = await supabase.auth.signUp({
         email: userData.email,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        name: `${userData.firstName || ""} ${userData.lastName || ""}`.trim() || userData.email.split("@")[0],
-        isLoggedIn: true,
+        password: userData.password,
+        options: {
+          data: {
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            full_name: `${userData.firstName || ""} ${userData.lastName || ""}`.trim(),
+          },
+        },
+      })
+
+      if (error) {
+        throw new Error(error.message)
       }
 
-      localStorage.setItem("tressmuse_user", JSON.stringify(user))
-      setUser(user)
+      if (data.user) {
+        setUser({
+          id: data.user.id,
+          email: data.user.email || "",
+          name: `${userData.firstName || ""} ${userData.lastName || ""}`.trim() || data.user.email?.split("@")[0] || "",
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          isLoggedIn: true,
+        })
+      }
     } catch (error) {
-      throw new Error("Registration failed")
+      throw error
     } finally {
       setIsLoading(false)
     }
   }
 
-  const logout = () => {
-    localStorage.removeItem("tressmuse_user")
+  const logout = async () => {
+    await supabase.auth.signOut()
     setUser(null)
   }
 

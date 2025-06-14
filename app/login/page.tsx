@@ -8,7 +8,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/hooks/useAuth"
 import { Eye, EyeOff, Mail, Lock } from "lucide-react"
-import toast from "react-hot-toast"
+import toast, { Toaster } from "react-hot-toast"
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -43,8 +43,8 @@ export default function LoginPage() {
       await login(formData.email, formData.password)
       toast.success("Login successful!")
       router.push("/")
-    } catch (error) {
-      toast.error("Invalid email or password")
+    } catch (error: any) {
+      toast.error(error.message || "Invalid email or password")
     } finally {
       setIsLoading(false)
     }
@@ -52,6 +52,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center p-4">
+      <Toaster position="top-right" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
