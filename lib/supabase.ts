@@ -13,13 +13,14 @@ export type Product = {
   price: number
   phone: string
   whatsapp: string
-  image_url: string
+  images: string
   created_at: string
 }
 
 export type Review = {
   id: number
   name: string
-  review: string
+  rating: number
+  comment: string
   created_at: string
 }

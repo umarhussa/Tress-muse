@@ -2,163 +2,437 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { useProducts } from "@/lib/hooks/useProducts"
-import { Sparkles, Heart, Leaf, Award } from "lucide-react"
+import Navigation from "@/components/Navigation"
+import CustomerTestimonials from "@/components/CustomerTestimonials"
+import FeaturedProducts from "@/components/FeaturedProducts"
+import { Sparkles, Heart, Leaf, Award, Star, Shield, Users, Zap } from "lucide-react"
 
 export default function HomePage() {
-  const { products, loading } = useProducts()
-
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <span className="text-2xl">🌸</span>
-              <h1 className="text-2xl font-bold text-gray-800">Tress Muse</h1>
-            </div>
-            <div className="flex space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-gray-800">
-                Home
-              </Link>
-              <Link href="/products" className="text-gray-600 hover:text-gray-800">
-                Products
-              </Link>
-              <Link href="/login" className="text-gray-600 hover:text-gray-800">
-                Login
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen">
+      <Navigation />
 
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 to-orange-50">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-purple-600 to-orange-500 bg-clip-text text-transparent">
+      {/* Enhanced Hero Section */}
+      <section className="relative py-24 overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            animate={{
+              rotate: 360,
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+            className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-primary-200 to-secondary-200 rounded-full opacity-20 blur-xl"
+          />
+          <motion.div
+            animate={{
+              rotate: -360,
+              scale: [1, 0.8, 1],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+            className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-r from-secondary-200 to-primary-200 rounded-full opacity-20 blur-xl"
+          />
+          <motion.div
+            animate={{
+              y: [-20, 20, -20],
+              x: [-10, 10, -10],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+            className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-pink-300 to-purple-300 rounded-full opacity-10 blur-lg"
+          />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-center"
+          >
+            {/* Floating Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="inline-flex items-center bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 px-6 py-2 rounded-full text-sm font-medium mb-8 border border-primary-200"
+            >
+              <Star className="w-4 h-4 mr-2 text-yellow-500" />
+              Trusted by 10,000+ Happy Customers
+            </motion.div>
+
+            {/* Main Heading with Gradient Animation */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="text-5xl md:text-7xl font-bold mb-8 leading-tight"
+            >
+              <span className="bg-gradient-to-r from-primary-600 via-secondary-500 to-primary-600 bg-clip-text text-transparent bg-size-200 animate-gradient">
                 Transform Your Hair
               </span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Discover premium hair care products that nourish, strengthen, and beautify your hair naturally.
-            </p>
-            <Link
-              href="/products"
-              className="inline-flex items-center bg-gradient-to-r from-purple-500 to-orange-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transition-all duration-300"
+              <motion.span
+                animate={{
+                  rotate: [0, 15, -15, 0],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Number.POSITIVE_INFINITY,
+                  repeatDelay: 2,
+                }}
+                className="inline-block ml-4 text-6xl"
+              >
+                ✨
+              </motion.span>
+            </motion.h1>
+
+            {/* Subtitle with Typewriter Effect */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
             >
-              <Sparkles className="w-5 h-5 mr-2" />
-              Shop Now
-            </Link>
+              Discover premium hair care products that <span className="text-primary-600 font-semibold">nourish</span>,{" "}
+              <span className="text-secondary-600 font-semibold">strengthen</span>, and{" "}
+              <span className="text-primary-600 font-semibold">beautify</span> your hair naturally.
+            </motion.p>
+
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="flex justify-center"
+            >
+              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                <Link
+                  href="/products"
+                  className="relative bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 inline-flex items-center"
+                >
+                  <Sparkles className="w-5 h-5 mr-2" />
+                  Shop Now
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                    className="ml-2"
+                  >
+                    →
+                  </motion.span>
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Floating Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+              className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto"
+            >
+              {[
+                { number: "10K+", label: "Happy Customers" },
+                { number: "500+", label: "Products" },
+                { number: "99%", label: "Satisfaction" },
+              ].map((stat, index) => (
+                <motion.div key={index} whileHover={{ scale: 1.1 }} className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                    {stat.number}
+                  </div>
+                  <div className="text-gray-600 text-sm md:text-base">{stat.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Featured Products</h2>
-            <p className="text-xl text-gray-600">Discover our most popular hair care solutions</p>
-          </div>
+      {/* Featured Products Section */}
+      <FeaturedProducts />
 
-          {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="animate-pulse">
-                  <div className="bg-gray-200 h-64 rounded-lg mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {products.slice(0, 3).map((product) => (
-                <motion.div
-                  key={product.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-                >
-                  <div className="h-64 bg-gray-100"></div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                    <p className="text-gray-600 mb-4">{product.description}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-2xl font-bold text-purple-600">${product.price}</span>
-                      <button className="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors">
-                        View Details
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          )}
+      {/* Enhanced Why Choose Us Section with Fixed Hover Colors */}
+      <section className="py-20 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 transform rotate-12 scale-150"></div>
         </div>
-      </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Why Choose Tress Muse?</h2>
-            <p className="text-xl text-gray-600">Premium quality hair care solutions</p>
-          </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 px-6 py-2 rounded-full text-sm font-medium mb-6"
+            >
+              <Award className="w-4 h-4 mr-2" />
+              Why Choose Tress Muse?
+            </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-primary-600 via-secondary-500 to-primary-600 bg-clip-text text-transparent">
+                Premium Quality
+              </span>
+              <br />
+              <span className="text-gray-800">Hair Care Solutions</span>
+            </h2>
+
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              We're committed to providing the highest quality hair care products with natural ingredients that deliver
+              exceptional results.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
                 icon: <Leaf className="w-8 h-8" />,
                 title: "Natural Ingredients",
-                description: "Made with premium natural extracts",
+                description: "Made with premium natural extracts and essential oils for healthy hair growth",
+                gradient: "from-green-500 to-emerald-500",
+                bgGradient: "from-green-50 to-emerald-50",
+                iconBg: "from-green-100 to-emerald-100",
               },
               {
                 icon: <Award className="w-8 h-8" />,
                 title: "Premium Quality",
-                description: "Carefully crafted for best results",
+                description: "Carefully crafted products that deliver exceptional and long-lasting results",
+                gradient: "from-purple-500 to-violet-500",
+                bgGradient: "from-purple-50 to-violet-50",
+                iconBg: "from-purple-100 to-violet-100",
               },
               {
                 icon: <Heart className="w-8 h-8" />,
                 title: "Hair Health",
-                description: "Nourish and strengthen your hair",
+                description: "Nourish and strengthen your hair from root to tip with our specialized formulas",
+                gradient: "from-pink-500 to-rose-500",
+                bgGradient: "from-pink-50 to-rose-50",
+                iconBg: "from-pink-100 to-rose-100",
               },
               {
                 icon: <Sparkles className="w-8 h-8" />,
                 title: "Beautiful Results",
-                description: "Visible improvements in texture",
+                description: "Transform your hair with visible, lasting improvements in texture and shine",
+                gradient: "from-orange-500 to-yellow-500",
+                bgGradient: "from-orange-50 to-yellow-50",
+                iconBg: "from-orange-100 to-yellow-100",
               },
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center p-6 bg-white rounded-lg shadow-md"
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.1,
+                  ease: "easeOut",
+                }}
+                className="group relative"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-lg mb-4">
-                  <span className="text-purple-600">{feature.icon}</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <motion.div
+                  whileHover={{
+                    scale: 1.02,
+                    y: -8,
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    ease: "easeOut",
+                  }}
+                  className={`relative p-8 rounded-3xl bg-gradient-to-br ${feature.bgGradient} border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden h-full`}
+                >
+                  {/* Hover overlay */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl`}
+                  />
+
+                  {/* Content */}
+                  <div className="relative z-10">
+                    {/* Icon */}
+                    <motion.div
+                      whileHover={{
+                        rotate: 5,
+                        scale: 1.1,
+                      }}
+                      transition={{
+                        duration: 0.3,
+                        ease: "easeOut",
+                      }}
+                      className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br ${feature.iconBg} group-hover:bg-white/20 rounded-3xl mb-6 shadow-lg transition-all duration-300`}
+                    >
+                      <span className="text-gray-700 group-hover:text-white transition-colors duration-300">
+                        {feature.icon}
+                      </span>
+                    </motion.div>
+
+                    {/* Text Content */}
+                    <div>
+                      <h3 className="text-xl font-bold mb-4 text-gray-800 group-hover:text-white transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      <p className="text-gray-600 group-hover:text-white/90 leading-relaxed transition-colors duration-300 text-sm">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Subtle shine effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
+
+          {/* Additional Features */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
+          >
+            {[
+              {
+                icon: <Shield className="w-6 h-6" />,
+                title: "100% Safe",
+                description: "Dermatologist tested and approved",
+                color: "from-blue-500 to-cyan-500",
+              },
+              {
+                icon: <Users className="w-6 h-6" />,
+                title: "Expert Support",
+                description: "Professional hair care guidance",
+                color: "from-indigo-500 to-purple-500",
+              },
+              {
+                icon: <Zap className="w-6 h-6" />,
+                title: "Fast Results",
+                description: "Visible improvements in weeks",
+                color: "from-amber-500 to-orange-500",
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                whileHover={{
+                  scale: 1.05,
+                  y: -5,
+                }}
+                transition={{
+                  duration: 0.3,
+                  type: "spring",
+                  stiffness: 300,
+                }}
+                className="flex items-center p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 group"
+              >
+                <motion.div
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                  className={`flex-shrink-0 w-12 h-12 bg-gradient-to-r ${item.color} rounded-lg flex items-center justify-center mr-4 shadow-lg`}
+                >
+                  <span className="text-white">{item.icon}</span>
+                </motion.div>
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-1 group-hover:text-gray-900 transition-colors">
+                    {item.title}
+                  </h4>
+                  <p className="text-gray-600 text-sm group-hover:text-gray-700 transition-colors">
+                    {item.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
+
+      {/* Customer Testimonials Section */}
+      <CustomerTestimonials />
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
-          <div className="text-center">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <span className="text-2xl">🌸</span>
-              <h3 className="text-2xl font-bold">Tress Muse</h3>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="col-span-1 md:col-span-2">
+              <div className="flex items-center space-x-2 mb-4">
+                <span className="text-2xl">🌸</span>
+                <h3 className="text-2xl font-bold">Tress Muse</h3>
+              </div>
+              <p className="text-gray-400 mb-4 max-w-md">
+                Premium hair care products crafted with natural ingredients to transform and nourish your hair.
+              </p>
+              {/* Direct Add Product Link */}
+              <div className="mt-4">
+                <a
+                  href="/add-product"
+                  className="text-primary-400 hover:text-primary-300 transition-colors text-sm underline"
+                >
+                  Add Product (Admin)
+                </a>
+              </div>
             </div>
-            <p className="text-gray-400 mb-4">Premium hair care products crafted with natural ingredients</p>
+
+            <div>
+              <h4 className="font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="/" className="hover:text-white transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/products" className="hover:text-white transition-colors">
+                    Products
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/reviews" className="hover:text-white transition-colors">
+                    Reviews
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="/contact" className="hover:text-white transition-colors">
+                    Contact Us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/help" className="hover:text-white transition-colors">
+                    Help Center
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/shipping" className="hover:text-white transition-colors">
+                    Shipping Info
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-500">© 2024 Tress Muse. All rights reserved.</p>
           </div>
         </div>

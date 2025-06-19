@@ -7,13 +7,20 @@ type User = {
   id: string
   email: string
   name: string
+  firstName?: string
+  lastName?: string
   isLoggedIn: boolean
 }
 
 type AuthContextType = {
   user: User | null
   login: (email: string, password: string) => Promise<void>
-  register: (userData: { email: string; password: string; firstName?: string; lastName?: string }) => Promise<void>
+  register: (userData: {
+    email: string
+    password: string
+    firstName?: string
+    lastName?: string
+  }) => Promise<void>
   logout: () => void
   isLoading: boolean
 }
@@ -25,6 +32,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    // Get initial session
     const getSession = async () => {
       const {
         data: { session },
@@ -33,7 +41,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser({
           id: session.user.id,
           email: session.user.email || "",
-          name: session.user.email?.split("@")[0] || "",
+          name: session.user.user_metadata?.full_name || session.user.email?.split("@")[0] || "",
+          firstName: session.user.user_metadata?.firstName,
+          lastName: session.user.user_metadata?.lastName,
           isLoggedIn: true,
         })
       }
@@ -42,6 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     getSession()
 
+    // Listen for auth changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
@@ -49,7 +60,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser({
           id: session.user.id,
           email: session.user.email || "",
-          name: session.user.email?.split("@")[0] || "",
+          name: session.user.user_metadata?.full_name || session.user.email?.split("@")[0] || "",
+          firstName: session.user.user_metadata?.firstName,
+          lastName: session.user.user_metadata?.lastName,
           isLoggedIn: true,
         })
       } else {
@@ -62,16 +75,73 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const login = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) throw error
+    setIsLoading(true)
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+
+      if (error) {
+        throw new Error(error.message)
+      }
+
+      if (data.user) {
+        setUser({
+          id: data.user.id,
+          email: data.user.email || "",
+          name: data.user.user_metadata?.full_name || data.user.email?.split("@")[0] || "",
+          firstName: data.user.user_metadata?.firstName,
+          lastName: data.user.user_metadata?.lastName,
+          isLoggedIn: true,
+        })
+      }
+    } catch (error) {
+      throw error
+    } finally {
+      setIsLoading(false)
+    }
   }
 
-  const register = async (userData: { email: string; password: string; firstName?: string; lastName?: string }) => {
-    const { error } = await supabase.auth.signUp({
-      email: userData.email,
-      password: userData.password,
-    })
-    if (error) throw error
+  const register = async (userData: {
+    email: string
+    password: string
+    firstName?: string
+    lastName?: string
+  }) => {
+    setIsLoading(true)
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: userData.email,
+        password: userData.password,
+        options: {
+          data: {
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            full_name: `${userData.firstName || ""} ${userData.lastName || ""}`.trim(),
+          },
+        },
+      })
+
+      if (error) {
+        throw new Error(error.message)
+      }
+
+      if (data.user) {
+        setUser({
+          id: data.user.id,
+          email: data.user.email || "",
+          name: `${userData.firstName || ""} ${userData.lastName || ""}`.trim() || data.user.email?.split("@")[0] || "",
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          isLoggedIn: true,
+        })
+      }
+    } catch (error) {
+      throw error
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const logout = async () => {

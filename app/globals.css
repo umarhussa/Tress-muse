@@ -3,27 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --primary-50: #fef7ff;
-  --primary-100: #fdeeff;
-  --primary-200: #fcdcff;
-  --primary-300: #fac2ff;
-  --primary-400: #f69dff;
-  --primary-500: #ee6eff;
-  --primary-600: #dd4bef;
-  --primary-700: #c233d3;
-  --primary-800: #a02aad;
-  --primary-900: #85268a;
-
-  --secondary-50: #fff7ed;
-  --secondary-100: #ffedd5;
-  --secondary-200: #fed7aa;
-  --secondary-300: #fdba74;
-  --secondary-400: #fb923c;
-  --secondary-500: #f97316;
-  --secondary-600: #ea580c;
-  --secondary-700: #c2410c;
-  --secondary-800: #9a3412;
-  --secondary-900: #7c2d12;
+  --font-poppins: "Poppins", sans-serif;
 }
 
 * {
@@ -39,58 +19,159 @@ body {
 }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
-.primary-50 {
-  background-color: var(--primary-50);
-}
-.primary-100 {
-  background-color: var(--primary-100);
-}
-.primary-500 {
-  background-color: var(--primary-500);
-}
-.primary-600 {
-  background-color: var(--primary-600);
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.secondary-50 {
-  background-color: var(--secondary-50);
-}
-.secondary-100 {
-  background-color: var(--secondary-100);
-}
-.secondary-500 {
-  background-color: var(--secondary-500);
-}
-.secondary-600 {
-  background-color: var(--secondary-600);
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.text-primary-600 {
-  color: var(--primary-600);
-}
-.text-primary-700 {
-  color: var(--primary-700);
-}
-.text-secondary-600 {
-  color: var(--secondary-600);
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
 
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #ff779b, #ff9c34);
+  border-radius: 4px;
 }
 
-.from-primary-500 {
-  --tw-gradient-from: var(--primary-500);
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #ff4d7e, #fa8000);
 }
-.to-secondary-500 {
-  --tw-gradient-to: var(--secondary-500);
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
 }
-.from-primary-600 {
-  --tw-gradient-from: var(--primary-600);
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out forwards;
 }
-.to-secondary-600 {
-  --tw-gradient-to: var(--secondary-600);
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 200% 100%;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Card 3D effect */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+}
+
+/* Loading spinner */
+.loading-spinner {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #ff779b;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Modal animations */
+.modal-enter {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.modal-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.modal-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-exit-active {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Background size utility */
+.bg-size-200 {
+  background-size: 200% 200%;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .text-responsive {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+  }
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #ff779b;
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
