@@ -7,13 +7,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["yvnsgflmivcotvmklzvw.supabase.co"],
     unoptimized: true,
   },
-  experimental: {
-    appDir: true,
-  },
-  output: "standalone",
 }
 
 module.exports = nextConfig
